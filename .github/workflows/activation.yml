@@ -16,6 +16,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/project" \
+            -w /project \
             unityci/editor:ubuntu-2019.1.5f1-android-3.2.2 \
             unity-editor \
               -batchmode \
@@ -30,7 +31,8 @@ jobs:
             echo "✅ File .alf berhasil dibuat"
             ls -lh "${{ github.workspace }}/Unity_v2019.1.5f1.alf"
           else
-            echo "❌ File .alf tidak ditemukan"
+            echo "File tidak ada di workspace, mencari di lokasi lain..."
+            find / -name "*.alf" 2>/dev/null || true
             exit 1
           fi
 
