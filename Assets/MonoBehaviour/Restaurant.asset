@@ -14,7 +14,7 @@ MonoBehaviour:
   general:
     dataName: "Idle Bakery Tycoon"
     startCash: 100
-    startDiamond: 0
+    startDiamond: 10
     idleCashRate: 20
     minOfflineTime: 120
     maxOfflineTime: 43200
@@ -24,8 +24,8 @@ MonoBehaviour:
     boostIncomeDuration: 7200
     boostIncomeEffective: 2
     boostIncomeMaxDuration: 43200
-    onlineBoostEffective: 2
-    offlineBoostEffective: 2
+    onlineBoostEffective: 10
+    offlineBoostEffective: 10
   kitchen:
     maxLevel: 800
     maxFloor: 20
@@ -99,9 +99,9 @@ MonoBehaviour:
     - level: 200
       superCash: 8
   freeCash:
-    diamondBonus: 15
-    watchAdLimited: 3
-    cooldownPerAds: 14400
+    diamondBonus: 1
+    watchAdLimited: 10
+    cooldownPerAds: 30
   barrier:
   - unlockDuration: 3600
     diamondToUnlock: 50
