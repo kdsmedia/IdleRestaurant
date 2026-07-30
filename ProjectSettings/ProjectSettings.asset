@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Nadine Studio
-  productName: Mr Chef
+  companyName: ALTOMEDIA
+  productName: Idle Restaurant
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -260,7 +260,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: mrchef.keystore'
+  AndroidKeystoreName: '{inproject}: altomedia.keystore'
   AndroidKeyaliasName: izzy768
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -650,14 +650,14 @@ PlayerSettings:
     Standalone: 6
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: IdleGame1
+  metroPackageName: com.altomedia.idlerestaurant
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: IdleGame1
+  metroApplicationDescription: Idle Restaurant by ALTOMEDIA
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0

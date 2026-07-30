@@ -196,19 +196,19 @@ public class AdsControl : MonoBehaviour
     // ── Misc ──────────────────────────────────────────────────────────────────
     public void ShowFB()
     {
-        Application.OpenURL("https://www.facebook.com/PonyStudio2507/?ref=settings");
+        Application.OpenURL("https://www.facebook.com/altomedia");
     }
 
     public void RateMyGame()
     {
 #if UNITY_EDITOR
-        Application.OpenURL("https://itunes.apple.com/us/app/color-flow-puzzle/id1436566275?ls=1&mt=8");
+        Application.OpenURL("https://apps.apple.com/app/idle-restaurant/id1436566275");
 #elif UNITY_ANDROID
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.ponygames.MagicBlockPuzzle");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.altomedia.idlerestaurant");
 #elif UNITY_IPHONE
-        Application.OpenURL("https://itunes.apple.com/us/app/color-flow-puzzle/id1436566275?ls=1&mt=8");
+        Application.OpenURL("https://apps.apple.com/app/idle-restaurant/id1436566275");
 #else
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.ponygames.MagicBlockPuzzle");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.altomedia.idlerestaurant");
 #endif
     }
 }

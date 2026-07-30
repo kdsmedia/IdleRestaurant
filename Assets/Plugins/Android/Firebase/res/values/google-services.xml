@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
-  <string name="firebase_database_url" translatable="false">https://mitu-29266.firebaseio.com</string>
-  <string name="gcm_defaultSenderId" translatable="false">230800387869</string>
-  <string name="google_storage_bucket" translatable="false">mitu-29266.appspot.com</string>
-  <string name="project_id" translatable="false">mitu-29266</string>
-  <string name="google_api_key" translatable="false">AIzaSyAsjkfucdwGpqk4U833y8mrSuydVJ3lPxo</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAsjkfucdwGpqk4U833y8mrSuydVJ3lPxo</string>
-  <string name="google_app_id" translatable="false">1:230800387869:android:0b3cc6e03d13a0c3f8fbf4</string>
-  <string name="default_web_client_id" translatable="false">230800387869-uv8h1m5kslsjgss8utjj2lumccj3321j.apps.googleusercontent.com</string>
-</resources>
+    <resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+    <string name="firebase_database_url" translatable="false">https://altomedia-8f793-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">327513974065</string>
+    <string name="google_storage_bucket" translatable="false">altomedia-8f793.firebasestorage.app</string>
+    <string name="project_id" translatable="false">altomedia-8f793</string>
+    <string name="google_api_key" translatable="false">AIzaSyDGmV5ZIVsR38zyLCQ6dbtP1Fw9dV36qRk</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDGmV5ZIVsR38zyLCQ6dbtP1Fw9dV36qRk</string>
+    <string name="google_app_id" translatable="false">1:327513974065:android:b0015696e6c456b691bc10</string>
+    <string name="default_web_client_id" translatable="false">327513974065-stp6e2q4ebm41pj3rcaeaab3flbm46l5.apps.googleusercontent.com</string>
+    </resources>
