@@ -1,29 +1,44 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
-using UnityEngine.SocialPlatforms;
 using GoogleMobileAds.Api;
 using System;
-using UnityEngine.Advertisements;
 using UnityEngine.UI;
+
+/// <summary>
+/// Manages all ads using Google AdMob only:
+///   - Banner (bottom of screen)
+///   - Interstitial (full-screen, shown every 3 actions)
+///   - Rewarded Video
+/// </summary>
 public class AdsControl : MonoBehaviour
 {
-
-
-    protected AdsControl()
-    {
-    }
+    protected AdsControl() { }
 
     private static AdsControl _instance;
-    InterstitialAd interstitial;
-    RewardBasedVideoAd rewardBasedVideo;
-    BannerView bannerView;
-    ShowOptions options;
-    public string AdmobID_Android, AdmobID_IOS, BannerID_Android, BannerID_IOS;
-    public string UnityID_Android, UnityID_IOS, UnityZoneID;
-
     public static AdsControl Instance { get { return _instance; } }
 
+    // ── Inspector fields ─────────────────────────────────────────────────────
+    [Header("Interstitial Ad Unit IDs")]
+    public string AdmobID_Android;
+    public string AdmobID_IOS;
+
+    [Header("Banner Ad Unit IDs")]
+    public string BannerID_Android;
+    public string BannerID_IOS;
+
+    [Header("Rewarded Video Ad Unit IDs")]
+    public string RewardVideoID_Android;
+    public string RewardVideoID_IOS;
+
+    // ── Private state ─────────────────────────────────────────────────────────
+    private InterstitialAd interstitial;
+    private RewardedAd      rewardedAd;
+    private BannerView      bannerView;
+
+    // Stored callback for reward video result
+    private Action<bool> pendingRewardCallback;
+
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
     void Awake()
     {
         if (FindObjectsOfType(typeof(AdsControl)).Length > 1)
@@ -31,138 +46,154 @@ public class AdsControl : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         _instance = this;
-        MakeNewInterstial();
+
+        MobileAds.Initialize(initStatus => { });   // Initialize AdMob SDK
+
+        MakeNewInterstitial();
         RequestBanner();
+        LoadRewardedAd();
+
         if (PlayerPrefs.GetInt("RemoveAds") == 0)
             ShowBanner();
         else
             HideBanner();
-        if (Advertisement.isSupported)
-        { // If the platform is supported,
-#if UNITY_IOS
-			Advertisement.Initialize (UnityID_IOS); // initialize Unity Ads.
-#endif
 
-#if UNITY_ANDROID
-            Advertisement.Initialize(UnityID_Android); // initialize Unity Ads.
-#endif
-        }
-        options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
-
-        DontDestroyOnLoad(gameObject); //Already done by CBManager
-
-
+        DontDestroyOnLoad(gameObject);
     }
 
-
-    public void HandleInterstialAdClosed(object sender, EventArgs args)
+    // ── Interstitial ──────────────────────────────────────────────────────────
+    private void MakeNewInterstitial()
     {
-
+#if UNITY_ANDROID
+        string adUnitId = AdmobID_Android;
+#elif UNITY_IPHONE
+        string adUnitId = AdmobID_IOS;
+#else
+        string adUnitId = "unused";
+#endif
         if (interstitial != null)
             interstitial.Destroy();
-        MakeNewInterstial();
 
-
-
+        interstitial = new InterstitialAd(adUnitId);
+        interstitial.OnAdClosed += HandleInterstitialAdClosed;
+        interstitial.LoadAd(new AdRequest.Builder().Build());
     }
 
-    void MakeNewInterstial()
+    private void HandleInterstitialAdClosed(object sender, EventArgs args)
     {
-
-
-#if UNITY_ANDROID
-        interstitial = new InterstitialAd(AdmobID_Android);
-#endif
-#if UNITY_IPHONE
-		interstitial = new InterstitialAd (AdmobID_IOS);
-#endif
-        interstitial.OnAdClosed += HandleInterstialAdClosed;
-        AdRequest request = new AdRequest.Builder().Build();
-        interstitial.LoadAd(request);
-
-
+        interstitial.Destroy();
+        MakeNewInterstitial();
     }
 
-
+    /// <summary>Show interstitial every 3 calls (AdsCounter).</summary>
     public void showAds()
     {
         int adsCounter = PlayerPrefs.GetInt("AdsCounter");
-
         if (adsCounter >= 2)
         {
-            if (PlayerPrefs.GetInt("RemoveAds") == 0)
-            {
-                if (interstitial.IsLoaded())
-                    interstitial.Show();
-                else
-                    if (Advertisement.IsReady())
-
-                    Advertisement.Show();  
-            }
+            if (PlayerPrefs.GetInt("RemoveAds") == 0 && interstitial != null && interstitial.IsLoaded())
+                interstitial.Show();
             adsCounter = 0;
         }
         else
         {
             adsCounter++;
         }
-
         PlayerPrefs.SetInt("AdsCounter", adsCounter);
     }
 
-
-    public bool GetRewardAvailable()
-    {
-        bool avaiable = false;
-        avaiable = Advertisement.IsReady();
-        return avaiable;
-    }
-
-    public void ShowRewardVideo()
-    {
-
-        Advertisement.Show(UnityZoneID, options);
-
-
-    }
-
-
+    // ── Banner ────────────────────────────────────────────────────────────────
     private void RequestBanner()
     {
 #if UNITY_EDITOR
         string adUnitId = "unused";
 #elif UNITY_ANDROID
-		string adUnitId = BannerID_Android;
+        string adUnitId = BannerID_Android;
 #elif UNITY_IPHONE
-		string adUnitId = BannerID_IOS;
+        string adUnitId = BannerID_IOS;
 #else
-		string adUnitId = "unexpected_platform";
+        string adUnitId = "unexpected_platform";
 #endif
-
-        // Create a 320x50 banner at the top of the screen.
         bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
-
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the banner with the request.
-        bannerView.LoadAd(request);
-
+        bannerView.LoadAd(new AdRequest.Builder().Build());
     }
 
     public void ShowBanner()
     {
-        bannerView.Show();
+        if (bannerView != null) bannerView.Show();
     }
 
     public void HideBanner()
     {
-        bannerView.Hide();
+        if (bannerView != null) bannerView.Hide();
     }
 
+    // ── Rewarded Video ────────────────────────────────────────────────────────
+    private void LoadRewardedAd()
+    {
+#if UNITY_ANDROID
+        string adUnitId = RewardVideoID_Android;
+#elif UNITY_IPHONE
+        string adUnitId = RewardVideoID_IOS;
+#else
+        string adUnitId = "unused";
+#endif
+        if (rewardedAd != null)
+            rewardedAd.Destroy();
 
+        rewardedAd = new RewardedAd(adUnitId);
 
+        // Fire true callback when reward is earned (fires before OnAdClosed)
+        rewardedAd.OnUserEarnedReward += (sender, rewardArgs) =>
+        {
+            if (pendingRewardCallback != null)
+            {
+                pendingRewardCallback(true);
+                pendingRewardCallback = null;
+            }
+        };
+
+        // Fire false callback if closed without reward, then preload next ad
+        rewardedAd.OnAdClosed += (sender, args) =>
+        {
+            if (pendingRewardCallback != null)
+            {
+                pendingRewardCallback(false);
+                pendingRewardCallback = null;
+            }
+            LoadRewardedAd();   // Preload next rewarded ad
+        };
+
+        rewardedAd.LoadAd(new AdRequest.Builder().Build());
+    }
+
+    /// <summary>Returns true if a rewarded video is loaded and ready to show.</summary>
+    public bool GetRewardAvailable()
+    {
+        return rewardedAd != null && rewardedAd.IsLoaded();
+    }
+
+    /// <summary>Show reward video. Callback: true = reward earned, false = skipped/failed.</summary>
+    public void PlayDelegateRewardVideo(Action<bool> onVideoPlayed)
+    {
+        if (!GetRewardAvailable())
+        {
+            onVideoPlayed(false);
+            return;
+        }
+        pendingRewardCallback = onVideoPlayed;
+        rewardedAd.Show();
+    }
+
+    /// <summary>Show reward video without a result callback.</summary>
+    public void ShowRewardVideo()
+    {
+        if (GetRewardAvailable())
+            rewardedAd.Show();
+    }
+
+    // ── Misc ──────────────────────────────────────────────────────────────────
     public void ShowFB()
     {
         Application.OpenURL("https://www.facebook.com/PonyStudio2507/?ref=settings");
@@ -179,56 +210,5 @@ public class AdsControl : MonoBehaviour
 #else
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.ponygames.MagicBlockPuzzle");
 #endif
-
-
-    }
-
-    private void HandleShowResult(ShowResult result)
-    {
-        switch (result)
-        {
-            case ShowResult.Finished:
-        
-                break;
-            case ShowResult.Skipped:
-                break;
-            case ShowResult.Failed:
-                break;
-        }
-    }
-
-    public void PlayCallbackRewardVideo(Action<ShowResult> _action)
-    {
-        ShowOptions _options = new ShowOptions();
-        _options.resultCallback = _action;
-        Advertisement.Show(UnityZoneID, _options);
-    }
-
-   public void PlayDelegateRewardVideo(Action<bool> onVideoPlayed)
-    {
-      
-        if (Advertisement.IsReady(UnityZoneID))
-        {
-            Advertisement.Show(UnityZoneID, new ShowOptions
-            {
-                //pause = true,
-                resultCallback = result => {
-                    switch (result)
-                    {
-                        case (ShowResult.Finished):
-                            onVideoPlayed(true);
-                            break;
-                        case (ShowResult.Failed):
-                            onVideoPlayed(false);
-                            break;
-                        case (ShowResult.Skipped):
-                            onVideoPlayed(false);
-                            break;
-                    }
-                }
-            });
-        }
-        onVideoPlayed(false);
     }
 }
-
