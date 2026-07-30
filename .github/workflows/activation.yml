@@ -1,0 +1,42 @@
+name: Unity License Activation (Jalankan Sekali)
+
+# Workflow ini menghasilkan file .alf lewat Docker Unity — tanpa perlu Unity Hub lokal.
+# Jalankan sekali, download .alf dari Artifacts, aktivasi di license.unity3d.com,
+# lalu simpan isi file .ulf sebagai secret UNITY_LICENSE di GitHub.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  activation:
+    name: Generate Unity Activation File (.alf)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate .alf activation file via Unity Docker
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/project" \
+            unityci/editor:ubuntu-2019.1.5f1-android-3.2.2 \
+            unity-editor \
+              -batchmode \
+              -nographics \
+              -logFile /dev/stdout \
+              -createManualActivationFile /project/Unity_v2019.1.5f1.alf \
+            || true
+
+      - name: Verify .alf file was created
+        run: |
+          if [ -f "${{ github.workspace }}/Unity_v2019.1.5f1.alf" ]; then
+            echo "✅ File .alf berhasil dibuat"
+            ls -lh "${{ github.workspace }}/Unity_v2019.1.5f1.alf"
+          else
+            echo "❌ File .alf tidak ditemukan"
+            exit 1
+          fi
+
+      - name: Upload .alf file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Unity_License_Request
+          path: Unity_v2019.1.5f1.alf
+          retention-days: 7
