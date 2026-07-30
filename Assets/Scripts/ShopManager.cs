@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +9,8 @@ public class ShopManager : MonoBehaviour
 	{
 		public string id;
 
-		public float price;
+		/// <summary>Number of ads the player must watch to unlock this pack.</summary>
+		public int adsRequired;
 
 		public Text priceLabel;
 
@@ -48,93 +48,12 @@ public class ShopManager : MonoBehaviour
 	{
 		public string id;
 
+		/// <summary>Always 1 — kept for Inspector compatibility. 1 ad = 1 diamond.</summary>
 		public int value;
-
-		public float price;
 
 		public Text valueLabel;
 
 		public Text priceLabel;
-	}
-
-	private sealed class _BuyPack_c__AnonStorey0
-	{
-		internal int index;
-
-		internal ShopManager _this;
-
-		internal void __m__0()
-		{
-			if (this.index != 0)
-			{
-				if (this.index == 1)
-				{
-					Singleton<DataManager>.Instance.database.nonConsume.Add(this._this.packProduct[this.index].id);
-					this._this.boostManager.TotalEffectiveCompute();
-					this._this.packProduct[this.index].target.SetActive(false);
-				}
-			}
-			else
-			{
-				Singleton<DataManager>.Instance.database.nonConsume.Add(this._this.packProduct[this.index].id);
-				this._this.packProduct[this.index].target.SetActive(false);
-			}
-			Singleton<SoundManager>.Instance.Play("Purchased");
-			Notification.instance.Warning("Purchased Completed");
-			if (Singleton<DataManager>.Instance.database.nonConsume.Count == this._this.packProduct.Length)
-			{
-				this._this.packHeader.SetActive(false);
-			}
-			Tracking.instance.IAP(this._this.packProduct[this.index].id);
-		}
-	}
-
-	private sealed class _BuyCoin_c__AnonStorey1
-	{
-		internal int index;
-
-		internal ShopManager _this;
-
-		internal void __m__0()
-		{
-			this._this.gameManager.SetDiamond(-this._this.coinProduct[this.index].price);
-			double cash = this._this.GetInstantCash() * (double)this._this.coinProduct[this.index].value;
-			this._this.coinItemPool.Pool(this._this.coinTargetLabel, cash);
-			Singleton<SoundManager>.Instance.Play("Purchased");
-		}
-	}
-
-	private sealed class _BuyBoost_c__AnonStorey2
-	{
-		internal int index;
-
-		internal ShopManager _this;
-
-		internal void __m__0()
-		{
-			this._this.gameManager.SetDiamond(-this._this.boostProduct[this.index].price);
-			Item item = new Item();
-			item.duration = this._this.boostProduct[this.index].time;
-			item.effective = this._this.boostProduct[this.index].value;
-			item.itemCount = 1;
-			Singleton<Inventory>.Instance.Add(item);
-			Singleton<SoundManager>.Instance.Play("Purchased");
-		}
-	}
-
-	private sealed class _BuyDiamond_c__AnonStorey3
-	{
-		internal int index;
-
-		internal ShopManager _this;
-
-		internal void __m__0()
-		{
-			this._this.gameManager.SetDiamond(this._this.diamondProduct[this.index].value);
-			Notification.instance.Warning("Received <color=#00FFDFFF>" + this._this.diamondProduct[this.index].value.ToString() + "</color> diamond");
-			Singleton<SoundManager>.Instance.Play("Purchased");
-			Tracking.instance.IAP(this._this.diamondProduct[this.index].id);
-		}
 	}
 
 	[SerializeField]
@@ -178,6 +97,8 @@ public class ShopManager : MonoBehaviour
 		this.LoadDefaultCoinProductPrice();
 	}
 
+	// ── Price label loaders ──────────────────────────────────────────────────
+
 	private void LoadDefaultPackProductPrice()
 	{
 		for (int i = 0; i < this.packProduct.Length; i++)
@@ -188,7 +109,10 @@ public class ShopManager : MonoBehaviour
 			}
 			else
 			{
-				GameUtilities.String.ToText(this.packProduct[i].priceLabel, "$" + this.packProduct[i].price);
+				int required = Mathf.Max(1, this.packProduct[i].adsRequired);
+				string progressKey = "PackAdProgress_" + this.packProduct[i].id;
+				int current = PlayerPrefs.GetInt(progressKey, 0);
+				GameUtilities.String.ToText(this.packProduct[i].priceLabel, current + "/" + required + " ads");
 			}
 		}
 		if (Singleton<DataManager>.Instance.database.nonConsume.Count == this.packProduct.Length)
@@ -219,42 +143,104 @@ public class ShopManager : MonoBehaviour
 	{
 		for (int i = 0; i < this.diamondProduct.Length; i++)
 		{
-			GameUtilities.String.ToText(this.diamondProduct[i].priceLabel, "$" + this.diamondProduct[i].price);
-			GameUtilities.String.ToText(this.diamondProduct[i].valueLabel, "+" + this.diamondProduct[i].value);
+			// 1 ad = 1 diamond
+			GameUtilities.String.ToText(this.diamondProduct[i].priceLabel, "1 ad");
+			GameUtilities.String.ToText(this.diamondProduct[i].valueLabel, "+1");
 		}
 	}
 
-	private double GetInstantCash()
-	{
-		double idleCash = Singleton<DataManager>.Instance.database.restaurant[Singleton<DataManager>.Instance.database.targetRestaurant].idleCash;
-		return Singleton<GameProcess>.Instance.GetInstantCash(idleCash);
-	}
+	// ── Buy actions ──────────────────────────────────────────────────────────
 
+	/// <summary>
+	/// Watch a rewarded ad to progress toward unlocking this pack.
+	/// Each ad watch counts as 1. Once the player has watched <c>adsRequired</c>
+	/// ads for this pack the pack is unlocked (non-consumable, one-time only).
+	/// </summary>
 	public void BuyPack(int index)
 	{
-		InAppPurchase.instance.BuyProductID(this.packProduct[index].id, delegate
+		if (Singleton<DataManager>.Instance.database.nonConsume.Contains(this.packProduct[index].id))
 		{
-			if (index != 0)
+			// Already owned — nothing to do.
+			return;
+		}
+
+		if (!AdsControl.Instance.GetRewardAvailable())
+		{
+			Notification.instance.Warning("No available video at the moment.");
+			Singleton<SoundManager>.Instance.Play("Notification");
+			return;
+		}
+
+		int required = Mathf.Max(1, this.packProduct[index].adsRequired);
+		string progressKey = "PackAdProgress_" + this.packProduct[index].id;
+
+		AdsControl.Instance.PlayDelegateRewardVideo(delegate(bool rewarded)
+		{
+			if (!rewarded) return;
+
+			int current = PlayerPrefs.GetInt(progressKey, 0) + 1;
+			PlayerPrefs.SetInt(progressKey, current);
+
+			if (current >= required)
 			{
-				if (index == 1)
+				// All required ads watched — unlock the pack.
+				PlayerPrefs.SetInt(progressKey, 0);
+
+				if (index == 0)
+				{
+					Singleton<DataManager>.Instance.database.nonConsume.Add(this.packProduct[index].id);
+					this.packProduct[index].target.SetActive(false);
+				}
+				else if (index == 1)
 				{
 					Singleton<DataManager>.Instance.database.nonConsume.Add(this.packProduct[index].id);
 					this.boostManager.TotalEffectiveCompute();
 					this.packProduct[index].target.SetActive(false);
 				}
+
+				Singleton<SoundManager>.Instance.Play("Purchased");
+				Notification.instance.Warning("Pack unlocked!");
+
+				if (Singleton<DataManager>.Instance.database.nonConsume.Count == this.packProduct.Length)
+				{
+					this.packHeader.SetActive(false);
+				}
+
+				Tracking.instance.IAP(this.packProduct[index].id);
 			}
 			else
 			{
-				Singleton<DataManager>.Instance.database.nonConsume.Add(this.packProduct[index].id);
-				this.packProduct[index].target.SetActive(false);
+				// Progress notification.
+				Singleton<SoundManager>.Instance.Play("Rewarded");
+				Notification.instance.Warning("Progress: " + current + "/" + required + " ads watched.");
 			}
+
+			// Refresh the progress label.
+			this.LoadDefaultPackProductPrice();
+		});
+	}
+
+	/// <summary>
+	/// Watch a rewarded ad to receive 1 diamond.
+	/// The <c>index</c> parameter selects the UI slot — all slots give 1 diamond per ad.
+	/// </summary>
+	public void BuyDiamond(int index)
+	{
+		if (!AdsControl.Instance.GetRewardAvailable())
+		{
+			Notification.instance.Warning("No available video at the moment.");
+			Singleton<SoundManager>.Instance.Play("Notification");
+			return;
+		}
+
+		AdsControl.Instance.PlayDelegateRewardVideo(delegate(bool rewarded)
+		{
+			if (!rewarded) return;
+
+			this.gameManager.SetDiamond(1); // 1 ad = 1 diamond
+			Notification.instance.Warning("Received <color=#00FFDFFF>1</color> diamond");
 			Singleton<SoundManager>.Instance.Play("Purchased");
-			Notification.instance.Warning("Purchased Completed");
-			if (Singleton<DataManager>.Instance.database.nonConsume.Count == this.packProduct.Length)
-			{
-				this.packHeader.SetActive(false);
-			}
-			Tracking.instance.IAP(this.packProduct[index].id);
+			Tracking.instance.IAP(this.diamondProduct[index].id);
 		});
 	}
 
@@ -272,7 +258,7 @@ public class ShopManager : MonoBehaviour
 			double cash = this.GetInstantCash() * (double)this.coinProduct[index].value;
 			this.coinItemPool.Pool(this.coinTargetLabel, cash);
 			Singleton<SoundManager>.Instance.Play("Purchased");
-		}, "Do you want to buy this item or <color=#00B5FFFF>" + this.coinProduct[index].price.ToString() + "</color> diamond ?");
+		}, "Do you want to buy this item for <color=#00B5FFFF>" + this.coinProduct[index].price.ToString() + "</color> diamond ?");
 	}
 
 	public void BuyBoost(int index)
@@ -295,16 +281,7 @@ public class ShopManager : MonoBehaviour
 		}, "Do you want to buy this item for <color=#00B5FFFF>" + this.boostProduct[index].price.ToString() + "</color> diamond ?");
 	}
 
-	public void BuyDiamond(int index)
-	{
-		InAppPurchase.instance.BuyProductID(this.diamondProduct[index].id, delegate
-		{
-			this.gameManager.SetDiamond(this.diamondProduct[index].value);
-			Notification.instance.Warning("Received <color=#00FFDFFF>" + this.diamondProduct[index].value.ToString() + "</color> diamond");
-			Singleton<SoundManager>.Instance.Play("Purchased");
-			Tracking.instance.IAP(this.diamondProduct[index].id);
-		});
-	}
+	// ── Utilities ────────────────────────────────────────────────────────────
 
 	public void ShowPopup(bool value)
 	{
@@ -319,5 +296,11 @@ public class ShopManager : MonoBehaviour
 	public void MoveToBoth(RectTransform rectTransform)
 	{
 		this.shopRectransform.anchoredPosition = new Vector2(this.shopRectransform.anchoredPosition.x, -(rectTransform.anchoredPosition.y + 120f));
+	}
+
+	private double GetInstantCash()
+	{
+		double idleCash = Singleton<DataManager>.Instance.database.restaurant[Singleton<DataManager>.Instance.database.targetRestaurant].idleCash;
+		return Singleton<GameProcess>.Instance.GetInstantCash(idleCash);
 	}
 }
