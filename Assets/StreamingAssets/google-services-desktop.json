@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "230800387869-v062nl5ndgr065bt0h5sot6kmfem9nv9.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfp2HjyEpZ_MW-BNIL6W_VGRMTHlwWuic"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:230800387869:ios:7dca332de15ce86df8fbf4", 
+        "android_client_info": {
+          "package_name": "com.nadinestudio.mrchef.idlerestaurant"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "mitu-29266.appspot.com", 
+    "project_id": "mitu-29266", 
+    "firebase_url": "https://mitu-29266.firebaseio.com", 
+    "project_number": "230800387869"
+  }
+}
