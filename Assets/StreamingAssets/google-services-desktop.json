@@ -1,37 +1,40 @@
 {
+  "project_info": {
+    "project_number": "327513974065",
+    "firebase_url": "https://altomedia-8f793-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "altomedia-8f793",
+    "storage_bucket": "altomedia-8f793.firebasestorage.app"
+  },
   "client": [
     {
-      "services": {
-        "appinvite_service": {
-          "status": 1
-        }, 
-        "analytics_service": {
-          "status": 0
-        }
-      }, 
-      "oauth_client": [
-        {
-          "client_id": "230800387869-v062nl5ndgr065bt0h5sot6kmfem9nv9.apps.googleusercontent.com"
-        }
-      ], 
-      "api_key": [
-        {
-          "current_key": "AIzaSyBfp2HjyEpZ_MW-BNIL6W_VGRMTHlwWuic"
-        }
-      ], 
       "client_info": {
-        "mobilesdk_app_id": "1:230800387869:ios:7dca332de15ce86df8fbf4", 
+        "mobilesdk_app_id": "1:327513974065:android:b0015696e6c456b691bc10",
         "android_client_info": {
           "package_name": "com.altomedia.idlerestaurant"
         }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327513974065-stp6e2q4ebm41pj3rcaeaab3flbm46l5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGmV5ZIVsR38zyLCQ6dbtP1Fw9dV36qRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327513974065-stp6e2q4ebm41pj3rcaeaab3flbm46l5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
       }
     }
-  ], 
-  "configuration_version": "1", 
-  "project_info": {
-    "storage_bucket": "mitu-29266.appspot.com", 
-    "project_id": "mitu-29266", 
-    "firebase_url": "https://mitu-29266.firebaseio.com", 
-    "project_number": "230800387869"
-  }
+  ],
+  "configuration_version": "1"
 }
