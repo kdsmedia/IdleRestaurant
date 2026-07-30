@@ -1,44 +1,58 @@
 name: Unity License Activation (Jalankan Sekali)
 
-# Workflow ini menghasilkan file .alf lewat Docker Unity — tanpa perlu Unity Hub lokal.
-# Jalankan sekali, download .alf dari Artifacts, aktivasi di license.unity3d.com,
-# lalu simpan isi file .ulf sebagai secret UNITY_LICENSE di GitHub.
+# Workflow ini otomatis aktivasi Unity Personal menggunakan email + password.
+# Tidak perlu upload .alf ke website apapun.
+#
+# SEBELUM MENJALANKAN — simpan dulu 2 secrets di GitHub:
+#   Settings → Secrets and variables → Actions → New repository secret
+#   - UNITY_EMAIL    : email akun Unity Anda
+#   - UNITY_PASSWORD : password akun Unity Anda
+#
+# Setelah workflow selesai:
+#   1. Download artifact "Unity_License_File"
+#   2. Buka file Unity_lic.ulf dengan Notepad → copy semua isinya
+#   3. Simpan sebagai secret UNITY_LICENSE di GitHub
 
 on:
   workflow_dispatch:
 
 jobs:
   activation:
-    name: Generate Unity Activation File (.alf)
+    name: Activate Unity Personal License
     runs-on: ubuntu-latest
     steps:
-      - name: Generate .alf activation file via Unity Docker
+      - name: Activate Unity with email and password
         run: |
           docker run --rm \
-            -v "${{ github.workspace }}:/project" \
-            -w /project \
+            -v "${{ github.workspace }}:/output" \
             unityci/editor:ubuntu-2019.1.5f1-android-3.2.2 \
-            unity-editor \
-              -batchmode \
-              -nographics \
-              -logFile /dev/stdout \
-              -createManualActivationFile /project/Unity_v2019.1.5f1.alf \
-            || true
+            bash -c "
+              echo '=== Activating Unity Personal License ===' && \
+              unity-editor \
+                -batchmode \
+                -nographics \
+                -logFile /dev/stdout \
+                -username '${{ secrets.UNITY_EMAIL }}' \
+                -password '${{ secrets.UNITY_PASSWORD }}' \
+                -quit || true && \
+              echo '=== Searching for license file ===' && \
+              find / -name 'Unity_lic.ulf' 2>/dev/null && \
+              cp \$(find / -name 'Unity_lic.ulf' 2>/dev/null | head -1) /output/Unity_lic.ulf && \
+              echo '=== License file copied to /output ==='
+            "
 
-      - name: Verify .alf file was created
+      - name: Verify license file
         run: |
-          if [ -f "${{ github.workspace }}/Unity_v2019.1.5f1.alf" ]; then
-            echo "✅ File .alf berhasil dibuat"
-            ls -lh "${{ github.workspace }}/Unity_v2019.1.5f1.alf"
+          if [ -f "${{ github.workspace }}/Unity_lic.ulf" ]; then
+            echo "✅ File Unity_lic.ulf berhasil dibuat ($(wc -c < Unity_lic.ulf) bytes)"
           else
-            echo "File tidak ada di workspace, mencari di lokasi lain..."
-            find / -name "*.alf" 2>/dev/null || true
+            echo "❌ File lisensi tidak ditemukan. Periksa UNITY_EMAIL dan UNITY_PASSWORD."
             exit 1
           fi
 
-      - name: Upload .alf file as artifact
+      - name: Upload license file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Unity_License_Request
-          path: Unity_v2019.1.5f1.alf
-          retention-days: 7
+          name: Unity_License_File
+          path: Unity_lic.ulf
+          retention-days: 1
