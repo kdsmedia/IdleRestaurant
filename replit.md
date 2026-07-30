@@ -35,12 +35,40 @@ A Unity mobile idle restaurant game for Android, originally developed by Altomed
 4. **Hardcoded AdMob IDs** in `AdsControl.cs` — fine for the original app; update if rebranding or creating a new AdMob property.
 
 ## Running / Building
-This project must be opened and built in **Unity 2019.1.5f1** (or a compatible 2019.x version). Replit does not include the Unity Editor — building must be done on a local machine or Unity Cloud Build.
 
-Steps to build locally:
-1. Open project in Unity 2019.1.5f1
-2. Place `google-services.json` in `Assets/` (Android) or `GoogleService-Info.plist` in `Assets/` (iOS)
-3. Set Bundle Identifier to `com.altomedia.idlerestaurant` (or your new ID)
+### Build Otomatis via GitHub Actions
+Setiap push ke branch `main` akan otomatis build APK Android dan membuat GitHub Release.
+Workflow ada di `.github/workflows/build.yml`.
+
+**Setup sekali (wajib sebelum build otomatis bisa berjalan):**
+
+Game-ci v4 memerlukan lisensi Unity dari komputer lokal — tidak bisa lewat GitHub Actions.
+
+1. **Aktifkan lisensi di Unity Hub (komputer lokal):**
+   - Install [Unity Hub](https://unity.com/download)
+   - Login dengan akun Unity Anda
+   - Buka **Preferences → Licenses → Add → Get a free personal license**
+
+2. **Temukan file `.ulf`:**
+   - Windows: `C:\ProgramData\Unity\Unity_lic.ulf`
+   - Mac: `/Library/Application Support/Unity/Unity_lic.ulf`
+   - Linux: `~/.local/share/unity3d/Unity/Unity_lic.ulf`
+
+3. **Tambahkan 3 secrets di GitHub repository:**
+   Buka **Settings → Secrets and variables → Actions → New repository secret**
+
+   | Secret Name | Isi |
+   |---|---|
+   | `UNITY_LICENSE` | Seluruh isi file `.ulf` (buka dengan text editor, copy semua) |
+   | `UNITY_EMAIL` | Email akun Unity Anda |
+   | `UNITY_PASSWORD` | Password akun Unity Anda |
+
+Setelah 3 secrets tersimpan, push ke `main` → APK otomatis tersedia di tab **Releases**.
+
+### Build Lokal
+1. Open project di Unity 2019.1.5f1
+2. Pastikan `Assets/google-services.json` ada (Android)
+3. Set Bundle Identifier: `com.altomedia.idlerestaurant`
 4. File → Build Settings → Android → Build
 
 ## User Preferences
