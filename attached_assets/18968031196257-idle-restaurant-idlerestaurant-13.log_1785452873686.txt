@@ -2884,4 +2884,99 @@ Requesting Unity licenses for this machine...
 [warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN: For additional information on building in Batch Mode see https://support.unity.com/hc/en-us/articles/9466056266004-How-do-I-Build-Unity-Project-in-Batchmode-Locally-
 [warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN: Try running Unity 2021.3.45f2 in batch mode locally with the following commands:
 [warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN: When running from Windows:
-[warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN:        "C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Unity.exe" -logFile {PATH_TO_LOG_FILE} -projectPath {PROJECT_PATH} -batchmode -buildTarget android -accessToken eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NTUzODIsImlhdCI6MTc4NTQ1MTc4MiwibmJmIjoxNzg1NDUxNzgyLCJqdGkiOiI0NWUwZDY0Ny1jZTNmLTQ2NjctYjZiYy0wN2E0ZDI1YjUyNmEiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYn
+[warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN:        "C:\Program Files\Unity\Hub\Editor\2021.3.45f2\Editor\Unity.exe" -logFile {PATH_TO_LOG_FILE} -projectPath {PROJECT_PATH} -batchmode -buildTarget android -accessToken eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NTUzODIsImlhdCI6MTc4NTQ1MTc4MiwibmJmIjoxNzg1NDUxNzgyLCJqdGkiOiI0NWUwZDY0Ny1jZTNmLTQ2NjctYjZiYy0wN2E0ZDI1YjUyNmEiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYnVpbGRfYXV0b21hdGlvbi5saWNlbnNlcy5jcmVhdGUiLCJidWlsZF9hdXRvbWF0aW9uLm5pbnRlbmRvX2FkbWluLmFzc2lnbiIsImJ1aWxkX2F1dG9tYXRpb24ubmludGVuZG9fc3dpdGNoMV9kZXZlbG9wZXIuYXNzaWduIiwiYnVpbGRfYXV0b21hdGlvbi5uaW50ZW5kb19zd2l0Y2gyX2RldmVsb3Blci5hc3NpZ24iLCJvYXV0aC5qd3QubGVnYWN5LnBhc3N0aHJvdWdoIiwicGFja2FnZV9tYW5hZ2VyLnBhY2thZ2VzLnJlYWQiLCJ1bml0eS5vcmdhbml6YXRpb25fcG9saWNpZXMud3JpdGUiXSwiYXBpS2V5UHVibGljSWRlbnRpZmllciI6IjVlYmRiNjVjLWUyMjEtNDAxNy1iMGVmLTNiYWMwNGNjMmNkMCJ9.u2hhXq16EBaS-8qSRMVvg0WiGVybpF6DOGN0gqEyUvmVhSyBqtvNIN16t93weQ0em26QMQ3_D99aXhjkDt0iYYl3GWs7tWNmXLDsg6zs9-ofVVHFM_DtVjsrWwUic4j8yy8rVapWUZ7aZ6U2LzsJHkAllj64sqgrFOOoWwxl5tSNWd000AW7AkouADm8NipX4ezyVwzHLJVGZoe44k_FMHwxfBe84R3TXn0VjU2hKrWcQ8N_WH39bldbEUg7TRr_oHAqKEde-O-i858N-tKXgBoAuIy8O1YmaOd-BJCsKzlykruMRUTbNxYpSR40ZGmnXLt3seBnd-6hO8yk1tBKpw -quit -executeMethod {CLASS_AND_STATIC_METHOD_NAME_OF_BUILD_SCRIPT} -quit
+[warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN: When running from Mac:
+[warning] [2026-07-30T22:49:42.902Z] - 7.6.53.3.3.5 - WARN:        /APPLICATION_PATH/Unity/Hub/Editor/2021.3.45f2/Unity.app/Contents/MacOS/Unity -logFile {PATH_TO_LOG_FILE} -projectPath {PROJECT_PATH} -batchmode -buildTarget android -accessToken eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NTUzODIsImlhdCI6MTc4NTQ1MTc4MiwibmJmIjoxNzg1NDUxNzgyLCJqdGkiOiI0NWUwZDY0Ny1jZTNmLTQ2NjctYjZiYy0wN2E0ZDI1YjUyNmEiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYnVpbGRfYXV0b21hdGlvbi5saWNlbnNlcy5jcmVhdGUiLCJidWlsZF9hdXRvbWF0aW9uLm5pbnRlbmRvX2FkbWluLmFzc2lnbiIsImJ1aWxkX2F1dG9tYXRpb24ubmludGVuZG9fc3dpdGNoMV9kZXZlbG9wZXIuYXNzaWduIiwiYnVpbGRfYXV0b21hdGlvbi5uaW50ZW5kb19zd2l0Y2gyX2RldmVsb3Blci5hc3NpZ24iLCJvYXV0aC5qd3QubGVnYWN5LnBhc3N0aHJvdWdoIiwicGFja2FnZV9tYW5hZ2VyLnBhY2thZ2VzLnJlYWQiLCJ1bml0eS5vcmdhbml6YXRpb25fcG9saWNpZXMud3JpdGUiXSwiYXBpS2V5UHVibGljSWRlbnRpZmllciI6IjVlYmRiNjVjLWUyMjEtNDAxNy1iMGVmLTNiYWMwNGNjMmNkMCJ9.u2hhXq16EBaS-8qSRMVvg0WiGVybpF6DOGN0gqEyUvmVhSyBqtvNIN16t93weQ0em26QMQ3_D99aXhjkDt0iYYl3GWs7tWNmXLDsg6zs9-ofVVHFM_DtVjsrWwUic4j8yy8rVapWUZ7aZ6U2LzsJHkAllj64sqgrFOOoWwxl5tSNWd000AW7AkouADm8NipX4ezyVwzHLJVGZoe44k_FMHwxfBe84R3TXn0VjU2hKrWcQ8N_WH39bldbEUg7TRr_oHAqKEde-O-i858N-tKXgBoAuIy8O1YmaOd-BJCsKzlykruMRUTbNxYpSR40ZGmnXLt3seBnd-6hO8yk1tBKpw -quit -executeMethod {CLASS_AND_STATIC_METHOD_NAME_OF_BUILD_SCRIPT} -quit
+[error] [2026-07-30T22:49:42.903Z] - 7.6.53.3.3.5 - FATAL:        ! Unity player export failed!
+  SystemExit (exit):
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:491:in `exit'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:491:in `block in run_build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:473:in `run_build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:79:in `block in compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:78:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity.rb:22:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:222:in `block in compile_handlers'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `each'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `each_with_index'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `compile_handlers'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:77:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:142:in `call'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:142:in `build_chain'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:105:in `build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:168:in `call'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:168:in `build_steps'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:77:in `build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/buildjobs.rb:65:in `buildscript'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/buildjobs.rb:29:in `build_script'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/bin/bvr_runner:11:in `<main>'
+[2026-07-30T22:49:43.843Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T22:49:43.843Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T22:49:43.843Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T22:49:56.493Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T22:49:56.493Z] - 7.6.53.3.3.5 - INFO: + Publishing
+[2026-07-30T22:49:56.493Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T22:49:56.497Z] - 7.6.53.3.3.5 - INFO: Publishing build 13 of 18968031196257/69b00b1c-1eee-4b4a-ad9d-0e851d249cca for target 'idlerestaurant'...
+[2026-07-30T22:49:58.263Z] - 7.6.53.3.3.5 - INFO: SCM Checkout with credentials
+[2026-07-30T22:49:58.265Z] - 7.6.53.3.3.5 - INFO: configure_path: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' configure
+[2026-07-30T22:49:58.265Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' configure --language="en" --workingmode="SSOWorkingMode" --user="appsidhanie@gmail.com" --token="*****" --server="18968031196257@cloud" --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf"
+[2026-07-30T22:50:01.833Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' workspace delete C:\\workspace\\workspace\\artifacts --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:02.382Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' workspace create artifacts_13 C:\\workspace\\workspace\\artifacts rep:IdleRestaurant/69b00b1c-1eee-4b4a-ad9d-0e851d249cca_artifacts@18968031196257@cloud --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:07.057Z] - 7.6.53.3.3.5 - INFO: Workspace artifacts_13 has been correctly created
+[2026-07-30T22:50:07.073Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' switch br:170d6ba3-4f8f-441a-bab1-e1ddba74384e/build-attempt-13 --silent --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:11.212Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' update C:\\workspace\\workspace\\artifacts --silent --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:13.649Z] - 7.6.53.3.3.5 - INFO: SCM Checkout with credentials completed in 15 seconds.
+[2026-07-30T22:50:13.963Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' add * -R --silent  --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:16.266Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' ci --all --silent -c \"Checkin\ artifacts\ for\ 18968031196257/69b00b1c-1eee-4b4a-ad9d-0e851d249cca\ idlerestaurant\ 13\" --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T22:50:19.555Z] - 7.6.53.3.3.5 - INFO: Finished check-in for added files
+[2026-07-30T22:50:19.556Z] - 7.6.53.3.3.5 - INFO: Zipping cache files from Library using compression level 1
+[2026-07-30T22:50:30.213Z] - 7.6.53.3.3.5 - INFO: Created the archive file in 10.6572418 seconds.
+[2026-07-30T22:50:33.524Z] - 7.6.53.3.3.5 - DEBUG: done.
+[2026-07-30T22:50:33.905Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "PLASTIC_CM_CONFIG_DIRECTORY".
+Using /home/buildbot/.rvm/gems/ruby-3.3.5
+[2026-07-30T22:51:08.157Z] - 7.6.53.3.3.5 - DEBUG: /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/helpers.rb::apicall:: calling api method: post_buildattempts_postbuildsteps, args: ["18968031196257/69b00b1c-1eee-4b4a-ad9d-0e851d249cca", "idlerestaurant", "13", [{"name"=>"::Licensing.acquire_license", "messages"=>[], "duration"=>7784, "depth"=>0}, {"name"=>"::Licensing.acquire_license.token", "messages"=>[], "duration"=>7224, "depth"=>1}, {"name"=>"::SCM", "messages"=>[], "duration"=>23099, "depth"=>0}, {"name"=>"::SCM.checkout", "messages"=>[], "duration"=>20628, "depth"=>1}, {"name"=>"::SCM.post_checkout", "messages"=>[], "duration"=>1488, "depth"=>1}, {"name"=>"::Artifacts", "messages"=>[], "duration"=>14818, "depth"=>0}, {"name"=>"::Artifacts.download_cache", "messages"=>[], "duration"=>3496, "depth"=>1}, {"name"=>"::Artifacts.extract_cache", "messages"=>[], "duration"=>10901, "depth"=>1}, {"name"=>"bvr:buildjobs:builders:build_script", "messages"=>[], "duration"=>79727, "depth"=>0}, {"name"=>"bvr:buildjobs:builders:buildscript", "messages"=>[], "duration"=>76731, "depth"=>1}, {"name"=>"bvr:project:build", "messages"=>[], "duration"=>76730, "depth"=>2}, {"name"=>"::UnityCompiler.setup", "messages"=>[], "duration"=>1201, "depth"=>3}, {"name"=>"::UnityCompiler.remove_script_assemblies", "messages"=>[], "duration"=>11, "depth"=>3}, {"name"=>"::UnityCompiler.run_unit_tests", "messages"=>[], "duration"=>0, "depth"=>3}, {"name"=>"::UnityCompiler.run_build", "messages"=>[], "duration"=>75511, "depth"=>3}, {"name"=>"::UnityCompiler.unity_build", "messages"=>[], "duration"=>74528, "depth"=>4}, {"name"=>"::UnityCompiler.unity_build.save_config", "messages"=>[], "duration"=>2, "depth"=>5}, {"name"=>"::UnityCompiler.unity_build.execute_unity_build", "messages"=>[], "duration"=>44897, "depth"=>5}, {"name"=>"::UnityCompiler.unity_build.get_unity_log", "messages"=>[], "duration"=>28316, "depth"=>5}, {"name"=>"::UnityCompiler.check_success", "messages"=>[], "duration"=>246, "depth"=>4}, {"name"=>"::Publish", "messages"=>[], "duration"=>37276, "depth"=>0}, {"name"=>"::Publish:prepare_upload", "messages"=>[], "duration"=>253, "depth"=>1}, {"name"=>"::Publish:setup_artifact_workspace", "messages"=>[], "duration"=>15386, "depth"=>1}, {"name"=>"::Publish:uvcs_stage", "messages"=>[], "duration"=>2285, "depth"=>1}, {"name"=>"::Publish:uvcs_upload", "messages"=>[], "duration"=>3561, "depth"=>1}, {"name"=>"::Publish.cache", "messages"=>[], "durat...
+[2026-07-30T22:51:08.426Z] - 7.6.53.3.3.5 - INFO: postbuildsteps finished successfully
+[2026-07-30T22:51:31.789Z] - 7.6.53.3.3.5 - INFO: postbuildstatus finished successfully.
+Build step 'Execute scripts' changed build result to FAILURE
+Build step 'Execute scripts' marked build as failure
+[error] Finished: FAILURE
