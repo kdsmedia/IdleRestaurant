@@ -1,0 +1,1 @@
+- [Push-on-every-change preference](push-preference.md) — user requires a commit+push to GitHub after every edit, no exceptions.

@@ -1,0 +1,320 @@
+<pre>********************************************************************************
+The version of Unity you are using has a known security vulnerability.
+It is recommended to upgrade to one of the following patches (or higher) 
+corresponding to your Unity version:
+- 2019.4.41f1
+- 2020.3.49f1
+- 2021.3.45f2
+- 2021.3.56f2 XLTS
+- 2022.3.62f2
+- 2022.3.67f2 XLTS
+- 6000.0.58f2
+- 6000.1.17f1
+- 6000.2.6f2
+- 6000.3.0b4
+
+For more information on the vulnerability please visit:
+https://unity.com/security/sept-2025-01/remediation
+********************************************************************************
+********************************************************************************
+You are using a version of Unity which is no longer supported, we recommend
+upgrading your project to use a newer version.
+********************************************************************************
+Running as SYSTEM
+Running Prebuild steps
+In quiet period, build will start momentarily...
+[2026-07-30T20:32:55Z] - INFO: Initializing disk
+Current Partition Information:
+MSFT_Partition (ObjectId = "{1}\\bot-31-051030\root/Microsoft/Windo...)
+OS disk unallocated bytes: 0
+OS disk already fully allocated (<1GB free) - C: at max, skipping Get-PartitionSupportedSize + resize
+[2026-07-30T20:33:01Z] - INFO: Finished disk initialization
+[2026-07-30T20:33:01Z] - INFO: Mounting Unity Version: 2021_3_45f1
+[2026-07-30T20:33:02Z] - INFO: Mounting NAS (Azure File Share)
+[2026-07-30T20:33:02Z] - INFO: Network connectivity confirmed
+[2026-07-30T20:33:02Z] - INFO: Using managed identity authentication
+[2026-07-30T20:33:02Z] - INFO: Setting managed identity credentials (attempt 1 of 3)
+[2026-07-30T20:33:03Z] - INFO: Managed identity credentials set successfully
+[2026-07-30T20:33:03Z] - INFO: Kerberos ticket found in cache
+[2026-07-30T20:33:08Z] - INFO: Mounting NAS drive (attempt 1 of 3)
+The network connection could not be found.
+More help is available by typing NET HELPMSG 2250.
+[2026-07-30T20:33:09Z] - INFO: Successfully mounted NAS drive using managed identity authentication
+Mounting WIM image (attempt 1 of 3)...
+WIM image mounted successfully
+[2026-07-30T20:34:13Z] - INFO: Re-stamping mounted editor tool mtimes
+Re-stamped 0 future-dated of 11119 total files under C:\Mount\Unity\Data\PlaybackEngines\WebGLSupport in 0.6s
+Re-stamped 0 future-dated of 2152 total files under C:\Mount\Unity\Data\il2cpp in 0.1s
+Re-stamped 0 future-dated of 34 total files under C:\Mount\Unity\Data\Tools\BuildPipeline in 0s
+[2026-07-30T20:34:15Z] - INFO: Finished re-stamping mounted editor tool mtimes
+[2026-07-30T20:34:15Z] - INFO: Finished Mounting Unity Version
+Using /home/buildbot/.rvm/gems/ruby-3.3.5
+[2026-07-30T20:34:22Z] - INFO: Beginning dependency updates
+[2026-07-30T20:34:25Z] - INFO: Installing latest BVR version.
+1 gem installed
+[2026-07-30T20:34:36Z] - INFO: Removing 7.6.52.3.3.5
+Successfully uninstalled bvr-7.6.52.3.3.5
+[2026-07-30T20:34:37Z] - INFO: BuildPack DLL 'buildpack-c24614c.zip' already on disk, skipping download
+Requesting Unity licenses for this machine...
+[2026-07-30T20:34:56.779Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:34:56.779Z] - 7.6.53.3.3.5 - INFO: + Acquiring Unity License
+[2026-07-30T20:34:56.779Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:34:56.781Z] - 7.6.53.3.3.5 - INFO: Attempting to activate a token based license
+[2026-07-30T20:35:04.376Z] - 7.6.53.3.3.5 - INFO: [30/Jul/2026:20:35:03] Sent Unity activation metrics
+[2026-07-30T20:35:04Z] - INFO: Finished updating dependencies
+[2026-07-30T20:35:16.899Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:35:16.899Z] - 7.6.53.3.3.5 - INFO: + Configuring Build Attempt
+[2026-07-30T20:35:16.899Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:35:16.903Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:16.903Z] - 7.6.53.3.3.5 - INFO: + Updating Pre-Build Status
+[2026-07-30T20:35:16.903Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:17.342Z] - 7.6.53.3.3.5 - INFO: prebuildstatus finished successfully.
+[2026-07-30T20:35:17.342Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:17.342Z] - 7.6.53.3.3.5 - INFO: + Setting run time variables
+[2026-07-30T20:35:17.342Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:18.400Z] - 7.6.53.3.3.5 - INFO: Setting up SSH keys using ssh-agent
+[2026-07-30T20:35:19.018Z] - 7.6.53.3.3.5 - INFO: SSH key added to agent
+[2026-07-30T20:35:30.883Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:35:30.883Z] - 7.6.53.3.3.5 - INFO: + Checking out Source Code
+[2026-07-30T20:35:30.884Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:35:31.536Z] - 7.6.53.3.3.5 - INFO: SCM Checkout
+[2026-07-30T20:35:31.536Z] - 7.6.53.3.3.5 - INFO: GIT PAT: Checkout project...
+[2026-07-30T20:35:32.137Z] - 7.6.53.3.3.5 - INFO: GIT: git version (2.44.0)
+[2026-07-30T20:35:32.137Z] - 7.6.53.3.3.5 - INFO: GIT PAT: Checking out https://github.com/kdsmedia/IdleRestaurant.git/main with depth of -1
+[2026-07-30T20:35:37.058Z] - 7.6.53.3.3.5 - INFO: GIT: Checking out via URI...
+[2026-07-30T20:35:37.058Z] - 7.6.53.3.3.5 - INFO: Attempt 1 of 5 to clone repository.
+[2026-07-30T20:35:47.484Z] - 7.6.53.3.3.5 - INFO: Cloned in 10 seconds.
+[2026-07-30T20:35:48.332Z] - 7.6.53.3.3.5 - INFO: /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/scripts/git_update_timestamps.py BUILD_PATH/p
+[2026-07-30T20:35:50.005Z] - 7.6.53.3.3.5 - INFO: git lfs track
+[2026-07-30T20:35:51.410Z] - 7.6.53.3.3.5 - INFO: GIT PAT: Checkout operation complete.
+[2026-07-30T20:35:51.411Z] - 7.6.53.3.3.5 - INFO: SCM Checkout completed in 19 seconds.
+[2026-07-30T20:35:51.411Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:51.411Z] - 7.6.53.3.3.5 - INFO: + Updating Post-Checkout Status
+[2026-07-30T20:35:51.411Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:35:51.703Z] - 7.6.53.3.3.5 - INFO: Calculated Workspace Size: 252.38 MiB
+[2026-07-30T20:35:51.704Z] - 7.6.53.3.3.5 - INFO: GIT: Get current revision
+[2026-07-30T20:35:52.546Z] - 7.6.53.3.3.5 - INFO: GIT: Current revision is 673c0a16b2b60434ac68096b820887e1ccc5f71b
+[2026-07-30T20:35:52.546Z] - 7.6.53.3.3.5 - INFO: Detected last used Unity version from ProjectVersion.txt ({:editor_version=>"2021.3.45f1"})
+[2026-07-30T20:35:52.727Z] - 7.6.53.3.3.5 - INFO: postcheckoutstatus finished successfully.
+[2026-07-30T20:35:52.816Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_REVISION".
+[2026-07-30T20:36:03.714Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:03.714Z] - 7.6.53.3.3.5 - INFO: + Fetching Cached library_2021_3_45f1_windows
+[2026-07-30T20:36:03.714Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+No Library cache found - ALL assets will be re-imported.
+[2026-07-30T20:36:15.035Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:15.035Z] - 7.6.53.3.3.5 - INFO: + Fetch Android KeyStore
+[2026-07-30T20:36:15.035Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:15.035Z] - 7.6.53.3.3.5 - INFO: Fetching Android Keystore for project 18968031196257/69b00b1c-1eee-4b4a-ad9d-0e851d249cca and credential 9af188e9-7d82-4c48-8ebb-429c1f05fd81
+[2026-07-30T20:36:15.207Z] - 7.6.53.3.3.5 - INFO: Created the Android KeyStore
+[2026-07-30T20:36:29.305Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:29.305Z] - 7.6.53.3.3.5 - INFO: + Build Unity Project
+[2026-07-30T20:36:29.305Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: + Building with Unity installed at /cygdrive/c/Mount/Unity/Unity.exe
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: + Copy Buildpack
+[2026-07-30T20:36:29.311Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.789Z] - 7.6.53.3.3.5 - INFO: Using 2020 DLL
+[2026-07-30T20:36:29.789Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.789Z] - 7.6.53.3.3.5 - INFO: + Installing UnityCloud build tools
+[2026-07-30T20:36:29.789Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.795Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:29.795Z] - 7.6.53.3.3.5 - INFO: + Setting Build Target
+[2026-07-30T20:36:29.795Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.277Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.277Z] - 7.6.53.3.3.5 - INFO: + Inject Scripting Define Symbols
+[2026-07-30T20:36:30.277Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.277Z] - 7.6.53.3.3.5 - INFO:        Injecting custom Scripting Define Symbols 'UNITY_CLOUD_BUILD'
+[2026-07-30T20:36:30.279Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.279Z] - 7.6.53.3.3.5 - INFO: + Cache Enlighten Data
+[2026-07-30T20:36:30.279Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.522Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:30.523Z] - 7.6.53.3.3.5 - INFO: + Building Unity player (android)
+[2026-07-30T20:36:30.523Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++++++++++++++++++++++
+[2026-07-30T20:36:33Z - Unity] [Licensing::IpcConnector] Connection attempt to the License Client on channel: "LicenseClient-buildbot" failed because channel doesn't exist; code: "0x80000002"
+[2026-07-30T20:36:33Z - Unity] [Licensing::IpcConnector] Successfully connected to the License Client on channel: "LicenseClient-buildbot" at "2026-07-30T20:36:33.6131645Z"
+[2026-07-30T20:36:33Z - Unity] [Licensing::Client] Error: Code 10 while verifying Licensing Client signature (process Id: 5468, path: "C:/Mount/Unity/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[2026-07-30T20:36:33Z - Unity] [Licensing::Client] Handshaking with LicensingClient:
+[2026-07-30T20:36:33Z - Unity]   Version:                 1.15.4+eee609c
+[2026-07-30T20:36:33Z - Unity]   Session Id:              e03e3f7b241e4b22bab15dd6cd7071d0
+[2026-07-30T20:36:33Z - Unity]   Correlation Id:          5f3b8d916569f205206c13701cd47cbf
+[2026-07-30T20:36:33Z - Unity]   External correlation Id: 1348055390965244765
+[2026-07-30T20:36:33Z - Unity]   Machine Id:              K3GzaClpsx8yTZaAO5E4wMWRgfw=
+[2026-07-30T20:36:33Z - Unity] Entitlement-based licensing initiated
+[2026-07-30T20:36:33Z - Unity] [Licensing::Client] Successfully updated the access token
+[2026-07-30T20:36:34Z - Unity] [Licensing::Client] Successfully updated license
+[2026-07-30T20:36:34Z - Unity] Built from '2021.3/staging' branch; Version is '2021.3.45f1 (0da89fac8e79) revision 895135'; Using compiler version '192829333'; Build Type 'Release'
+[2026-07-30T20:36:34Z - Unity] OS: 'Windows 11  (10.0.26100) 64bit ServerRdsh' Language: 'en' Physical Memory: 16382 MB
+[2026-07-30T20:36:34Z - Unity] [Licensing::Client] Successfully resolved entitlement details
+[2026-07-30T20:36:34Z - Unity] BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[2026-07-30T20:36:34Z - Unity] [Licensing::Client] Successfully resolved entitlement details
+[2026-07-30T20:36:35Z - Unity]
+[2026-07-30T20:36:35Z - Unity] COMMAND LINE ARGUMENTS:
+[2026-07-30T20:36:35Z - Unity] C:\Mount\Unity\Unity.exe
+[2026-07-30T20:36:35Z - Unity] -batchmode
+[2026-07-30T20:36:35Z - Unity] -buildTarget
+[2026-07-30T20:36:35Z - Unity] android
+[2026-07-30T20:36:35Z - Unity] -accessToken
+[2026-07-30T20:36:35Z - Unity] eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NDczOTEsImlhdCI6MTc4NTQ0Mzc5MSwibmJmIjoxNzg1NDQzNzkxLCJqdGkiOiI5MGM1YjhkYS0xY2MyLTQ0NmMtYWQ3Mi04YzEzOWRjNGI4NDIiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYnVpbGRfYXV0b21hdGlvbi5saWNlbnNlcy5jcmVhdGUiLCJidWlsZF9hdXRvbWF0aW9uLm5pbnRlbmRvX2FkbWluLmFzc2lnbiIsImJ1aWxkX2F1dG9tYXRpb24ubmludGVuZG9fc3dpdGNoMV9kZXZlbG9wZXIuYXNzaWduIiwiYnVpbGRfYXV0b21hdGlvbi5uaW50ZW5kb19zd2l0Y2gyX2RldmVsb3Blci5hc3NpZ24iLCJvYXV0aC5qd3QubGVnYWN5LnBhc3N0aHJvdWdoIiwicGFja2FnZV9tYW5hZ2VyLnBhY2thZ2VzLnJlYWQiLCJ1bml0eS5vcmdhbml6YXRpb25fcG9saWNpZXMud3JpdGUiXSwiYXBpS2V5UHVibGljSWRlbnRpZmllciI6IjVlYmRiNjVjLWUyMjEtNDAxNy1iMGVmLTNiYWMwNGNjMmNkMCJ9.nfbwKAoTcUzE0VuFPOVui0TAGWrsFRs3MK04eaF6IXqGl3f-UioCc4ludMjQKClxdR4b_OstJrHfpqkdm02c75FZ0ahYjGAyjsGS3p3mSpKlU8NEEIpr4jwp_SNy2XRsJD-Jxy1yLpVnoe7HV7Y6NNZk3nmbRSl-QgRS6R-Q4QQ-SI2JcgHC-swRyyNbKDOgWTrDbXThWBGAttYVJkpTJKPX0f9HknJYpi_7nuDgegJslp2u0Dg8gif6-ngzJixuDxeLPY-txrX6UlC6ustr2KO-WlQD36A3LLlT6YIcrqWyt4TNkNsRaAOGJGzBwvUjPpBS7zyaQHyhRkOGwIJ-Wg
+[2026-07-30T20:36:35Z - Unity] -buildconfig
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p\build.json
+[2026-07-30T20:36:35Z - Unity] -bvrbuildtarget
+[2026-07-30T20:36:35Z - Unity] idlerestaurant
+[2026-07-30T20:36:35Z - Unity] -logFile
+[2026-07-30T20:36:35Z - Unity] -projectPath
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p
+[2026-07-30T20:36:35Z - Unity] -executeMethod
+[2026-07-30T20:36:35Z - Unity] UnityEditor.CloudBuild.Builder.Build
+[2026-07-30T20:36:35Z - Unity] -bvrextradatapath
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p\.build\last\idlerestaurant\extra_data
+[2026-07-30T20:36:35Z - Unity] -bvriconpath
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p\.build\last\idlerestaurant\extra_data\artifacts\icon.png
+[2026-07-30T20:36:35Z - Unity] -bvrbuildreportpath
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p\.build\last\idlerestaurant\extra_data\build_report
+[2026-07-30T20:36:35Z - Unity] -quit
+[2026-07-30T20:36:35Z - Unity] Successfully changed project path to: BUILD_PATH/p
+[2026-07-30T20:36:35Z - Unity] BUILD_PATH/p
+[2026-07-30T20:36:35Z - Unity] [UnityMemory] Configuration Parameters - Can be set up in boot.config
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-bucket-allocator-granularity=16"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-bucket-allocator-bucket-count=8"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-bucket-allocator-block-size=33554432"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-bucket-allocator-block-count=8"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-main-allocator-block-size=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-thread-allocator-block-size=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-gfx-main-allocator-block-size=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-gfx-thread-allocator-block-size=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-cache-allocator-block-size=4194304"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-typetree-allocator-block-size=2097152"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-bucket-allocator-granularity=16"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-bucket-allocator-bucket-count=8"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-bucket-allocator-block-size=33554432"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-bucket-allocator-block-count=8"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-allocator-block-size=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-profiler-editor-allocator-block-size=1048576"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-main=16777216"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-job-temp-allocator-block-size=2097152"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-job-temp-allocator-block-size-background=1048576"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-background-worker=32768"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-job-worker=262144"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-preload-manager=33554432"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-audio-worker=65536"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-cloud-worker=32768"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+[2026-07-30T20:36:35Z - Unity]     "memorysetup-temp-allocator-size-gfx=262144"
+[2026-07-30T20:36:35Z - Unity] Player connection [1752] Host "[IP] 10.9.0.119 [Port] 55496 [Flags] 2 [Guid] 535576449 [EditorId] 535576449 [Version] 1048832 [Id] WindowsEditor(7,bot-31-051030) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+[2026-07-30T20:36:35Z - Unity]
+[2026-07-30T20:36:35Z - Unity] Player connection [1752] Host "[IP] 10.9.0.119 [Port] 55496 [Flags] 2 [Guid] 535576449 [EditorId] 535576449 [Version] 1048832 [Id] WindowsEditor(7,bot-31-051030) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+[2026-07-30T20:36:35Z - Unity]
+[2026-07-30T20:36:35Z - Unity] [Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
+[2026-07-30T20:36:36Z - Unity] Rebuilding Library because the asset database could not be found!
+[2026-07-30T20:36:43Z - Unity] [Package Manager] Done resolving packages in 6.61s seconds
+[2026-07-30T20:36:43Z - Unity] [Licensing::Client] Successfully resolved entitlement details
+[2026-07-30T20:36:43Z - Unity] An error occurred while resolving packages:
+[2026-07-30T20:36:43Z - Unity]   Project has invalid dependencies:
+[2026-07-30T20:36:43Z - Unity]     com.unity.timeline: Package [com.unity.timeline@1.1.0] cannot be found
+[2026-07-30T20:36:43Z - Unity]
+[2026-07-30T20:36:43Z - Unity] A re-import of the project may be required to fix the issue or a manual modification of BUILD_PATH/p/Packages/manifest.json file.
+[2026-07-30T20:36:43Z - Unity] Exiting without the bug reporter. Application will terminate with return code 1
+[2026-07-30T20:36:43.638Z] - 7.6.53.3.3.5 - INFO:        Unity ran in '12.3965824' seconds
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN: Running Unity in Batch Mode can help reproduce and debug potential build/test issues.
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN: For additional information on building in Batch Mode see https://support.unity.com/hc/en-us/articles/9466056266004-How-do-I-Build-Unity-Project-in-Batchmode-Locally-
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN: Try running Unity 2021.3.45f1 in batch mode locally with the following commands:
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN: When running from Windows:
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN:        "C:\Program Files\Unity\Hub\Editor\2021.3.45f1\Editor\Unity.exe" -logFile {PATH_TO_LOG_FILE} -projectPath {PROJECT_PATH} -batchmode -buildTarget android -accessToken eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NDc0MDMsImlhdCI6MTc4NTQ0MzgwMywibmJmIjoxNzg1NDQzODAzLCJqdGkiOiJhZWVmMGUwZS0wZDBhLTQwNjktOWEyNS1iY2U5MjE5ODhiMzQiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYnVpbGRfYXV0b21hdGlvbi5saWNlbnNlcy5jcmVhdGUiLCJidWlsZF9hdXRvbWF0aW9uLm5pbnRlbmRvX2FkbWluLmFzc2lnbiIsImJ1aWxkX2F1dG9tYXRpb24ubmludGVuZG9fc3dpdGNoMV9kZXZlbG9wZXIuYXNzaWduIiwiYnVpbGRfYXV0b21hdGlvbi5uaW50ZW5kb19zd2l0Y2gyX2RldmVsb3Blci5hc3NpZ24iLCJvYXV0aC5qd3QubGVnYWN5LnBhc3N0aHJvdWdoIiwicGFja2FnZV9tYW5hZ2VyLnBhY2thZ2VzLnJlYWQiLCJ1bml0eS5vcmdhbml6YXRpb25fcG9saWNpZXMud3JpdGUiXSwiYXBpS2V5UHVibGljSWRlbnRpZmllciI6IjVlYmRiNjVjLWUyMjEtNDAxNy1iMGVmLTNiYWMwNGNjMmNkMCJ9.F8vP-Kz8iTKjLJyeFL2RTxOPB5wIRTy5-V3PR3U3h1gFGnKzyvM6ypts-cAKC6bFEEEKa8HzWjRrxQ3yjTMqzp8TMo5cKkqZhC9KocMcHgDjSN1prM-pai6fbjMq5AmKQXbp_71v89fMB4WVV7pupQY-FZF47JKlj5ttRCKIk96vKxLzkv01iEVBKeMHmAj5M8UQ1vZy_SxiSObmL4m09ZtbVpDlz0H1rs1kbtU0rRVTyBrDGwQ5SEmrXCt0ltZyjpie7EPdz7TbyKzBHG_OVQhWtfsbSUQY8BHd8XAx8dsZh98p0mggEig2Z1a8b3Ap0DmUh2gsApjcEuNFEE5teg -quit -executeMethod {CLASS_AND_STATIC_METHOD_NAME_OF_BUILD_SCRIPT} -quit
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN: When running from Mac:
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - WARN:        /APPLICATION_PATH/Unity/Hub/Editor/2021.3.45f1/Unity.app/Contents/MacOS/Unity -logFile {PATH_TO_LOG_FILE} -projectPath {PROJECT_PATH} -batchmode -buildTarget android -accessToken eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVuaXR5LWtleXM6MzU0OWFkNDMtN2RjYS00YTdkLTg2MWMtYjJmM2ZjZmMyZTAyIiwiamt1IjoiaHR0cHM6Ly9rZXlzLnNlcnZpY2VzLnVuaXR5LmNvbS8ifQ.eyJleHAiOjE3ODU0NDc0MDMsImlhdCI6MTc4NTQ0MzgwMywibmJmIjoxNzg1NDQzODAzLCJqdGkiOiJhZWVmMGUwZS0wZDBhLTQwNjktOWEyNS1iY2U5MjE5ODhiMzQiLCJzdWIiOiJhNTYwYmIwZS02MmY1LTQyZTMtODdjMC0yNTQ2NGYxODAxYmUiLCJ2ZXJzaW9uIjoxLCJpc3MiOiJodHRwczovL3NlcnZpY2VzLnVuaXR5LmNvbSIsImF1ZCI6WyJvcmdJZDoxODk2ODAzMTE5NjI1NyJdLCJzY29wZXMiOlsiYnVpbGRfYXV0b21hdGlvbi5saWNlbnNlcy5jcmVhdGUiLCJidWlsZF9hdXRvbWF0aW9uLm5pbnRlbmRvX2FkbWluLmFzc2lnbiIsImJ1aWxkX2F1dG9tYXRpb24ubmludGVuZG9fc3dpdGNoMV9kZXZlbG9wZXIuYXNzaWduIiwiYnVpbGRfYXV0b21hdGlvbi5uaW50ZW5kb19zd2l0Y2gyX2RldmVsb3Blci5hc3NpZ24iLCJvYXV0aC5qd3QubGVnYWN5LnBhc3N0aHJvdWdoIiwicGFja2FnZV9tYW5hZ2VyLnBhY2thZ2VzLnJlYWQiLCJ1bml0eS5vcmdhbml6YXRpb25fcG9saWNpZXMud3JpdGUiXSwiYXBpS2V5UHVibGljSWRlbnRpZmllciI6IjVlYmRiNjVjLWUyMjEtNDAxNy1iMGVmLTNiYWMwNGNjMmNkMCJ9.F8vP-Kz8iTKjLJyeFL2RTxOPB5wIRTy5-V3PR3U3h1gFGnKzyvM6ypts-cAKC6bFEEEKa8HzWjRrxQ3yjTMqzp8TMo5cKkqZhC9KocMcHgDjSN1prM-pai6fbjMq5AmKQXbp_71v89fMB4WVV7pupQY-FZF47JKlj5ttRCKIk96vKxLzkv01iEVBKeMHmAj5M8UQ1vZy_SxiSObmL4m09ZtbVpDlz0H1rs1kbtU0rRVTyBrDGwQ5SEmrXCt0ltZyjpie7EPdz7TbyKzBHG_OVQhWtfsbSUQY8BHd8XAx8dsZh98p0mggEig2Z1a8b3Ap0DmUh2gsApjcEuNFEE5teg -quit -executeMethod {CLASS_AND_STATIC_METHOD_NAME_OF_BUILD_SCRIPT} -quit
+[2026-07-30T20:36:43.986Z] - 7.6.53.3.3.5 - FATAL:        ! Unity player export failed!
+  SystemExit (exit):
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:491:in `exit'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:491:in `block in run_build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:473:in `run_build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:79:in `block in compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity_compiler.rb:78:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/handlers/unity.rb:22:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:222:in `block in compile_handlers'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `each'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `each_with_index'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:207:in `compile_handlers'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/build/build_handler.rb:77:in `compile'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:142:in `call'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:142:in `build_chain'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/project.rb:105:in `build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:168:in `call'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:168:in `build_steps'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/project.rb:77:in `build'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/buildjobs.rb:65:in `buildscript'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/tasks/buildjobs.rb:29:in `build_script'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:27:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/runner.rb:44:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:27:in `block in method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/utils/timing.rb:27:in `wrap'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/lib/bvr/thor/runner.rb:26:in `method_missing'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:29:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/command.rb:126:in `run'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/invocation.rb:126:in `invoke_command'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor.rb:369:in `dispatch'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/thor-0.19.4/lib/thor/base.rb:444:in `start'
+    /home/buildbot/.rvm/gems/ruby-3.3.5/gems/bvr-7.6.53.3.3.5/bin/bvr_runner:11:in `<main>'
+[2026-07-30T20:36:44.289Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T20:36:44.289Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T20:36:44.289Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "BUILD_RESULT".
+[2026-07-30T20:36:56.736Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:56.736Z] - 7.6.53.3.3.5 - INFO: + Publishing
+[2026-07-30T20:36:56.736Z] - 7.6.53.3.3.5 - INFO: ++++++++++++++++++++ SECTION ++++++++++++++++++++
+[2026-07-30T20:36:56.740Z] - 7.6.53.3.3.5 - INFO: Publishing build 1 of 18968031196257/69b00b1c-1eee-4b4a-ad9d-0e851d249cca for target 'idlerestaurant'...
+[2026-07-30T20:36:58.425Z] - 7.6.53.3.3.5 - INFO: SCM Checkout with credentials
+[2026-07-30T20:36:58.426Z] - 7.6.53.3.3.5 - INFO: configure_path: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' configure
+[2026-07-30T20:36:58.426Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' configure --language="en" --workingmode="SSOWorkingMode" --user="appsidhanie@gmail.com" --token="*****" --server="18968031196257@cloud" --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf"
+[2026-07-30T20:37:01.857Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' workspace delete C:\\workspace\\workspace\\artifacts --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T20:37:02.411Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' workspace create artifacts_1 C:\\workspace\\workspace\\artifacts rep:IdleRestaurant/69b00b1c-1eee-4b4a-ad9d-0e851d249cca_artifacts@18968031196257@cloud --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T20:37:07.010Z] - 7.6.53.3.3.5 - INFO: Workspace artifacts_1 has been correctly created
+[2026-07-30T20:37:07.019Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' switch br:170d6ba3-4f8f-441a-bab1-e1ddba74384e/build-attempt-1 --silent --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T20:37:11.124Z] - 7.6.53.3.3.5 - INFO: '/UNITY_PATH/Unity/windows/scm/plastic/PlasticSCM-11.0.16.8798/client/cm.exe' update C:\\workspace\\workspace\\artifacts --silent --clientconf="BUILD_PATH/config\client.conf" --tokensconf="BUILD_PATH/config\tokens.conf" --cloudregionsconf="BUILD_PATH/config\cloudregionstrue.conf" --config-files="webapi.conf=BUILD_PATH/config\webapitrue.conf"
+[2026-07-30T20:37:13.490Z] - 7.6.53.3.3.5 - INFO: SCM Checkout with credentials completed in 15 seconds.
+[2026-07-30T20:37:13.491Z] - 7.6.53.3.3.5 - INFO: No files were added to be checked in therefore the check-in operation will not be performed
+[2026-07-30T20:37:13.492Z] - 7.6.53.3.3.5 - INFO: Zipping cache files from Library using compression level 1
+[2026-07-30T20:37:14.699Z] - 7.6.53.3.3.5 - INFO: Created the archive file in 1.2070286 seconds.
+[2026-07-30T20:37:15.426Z] - 7.6.53.3.3.5 - DEBUG: done.
+[2026-07-30T20:37:15.676Z] - 7.6.53.3.3.5 - INFO: Setting the environment variable "PLASTIC_CM_CONFIG_DIRECTORY".
+Using /home/buildbot/.rvm/gems/ruby-3.3.5
+No Library cache found - ALL assets will be re-imported.
+[2026-07-30T20:37:48.688Z] - 7.6.53.3.3.5 - INFO: postbuildsteps finished successfully
+[2026-07-30T20:38:11.690Z] - 7.6.53.3.3.5 - INFO: postbuildstatus finished successfully.
+Build step 'Execute scripts' changed build result to FAILURE
+Build step 'Execute scripts' marked build as failure
+Finished: FAILURE
+</pre>
