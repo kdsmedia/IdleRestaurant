@@ -44,4 +44,4 @@ Steps to build locally:
 4. File → Build Settings → Android → Build
 
 ## User Preferences
-<!-- Add preferences here as needed -->
+- Setiap perubahan atau pengeditan wajib langsung di-commit dan di-push ke repository GitHub.
