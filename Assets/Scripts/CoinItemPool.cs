@@ -123,6 +123,15 @@ public class CoinItemPool : MonoBehaviour
 
 	public void Pool(Transform target, double cash)
 	{
+		if (target == null || this.coinPrefab == null || this.coinParent == null)
+		{
+			UnityEngine.Debug.LogError("CoinItemPool: missing required references.");
+			return;
+		}
+		if (this.itemCount <= 0)
+		{
+			return;
+		}
 		Singleton<SoundManager>.Instance.Play("Collect");
 		base.StartCoroutine(this.Spawn(target, cash));
 	}

@@ -47,11 +47,24 @@ public class RandomChef : MonoBehaviour
 			switch (num)
 			{
 			case 0u:
-				do
+				if (this._this.animations == null || this._this.animations.Length == 0 || this._this.animator == null)
 				{
-					this._random___0 = UnityEngine.Random.Range(0, this._this.animations.Length);
+					this._current = this._this.waitForSeconds;
+					if (!this._disposing) { this._PC = 1; }
+					return true;
 				}
-				while (this._random___0 == this._this.lastIndex);
+				if (this._this.animations.Length == 1)
+				{
+					this._random___0 = 0;
+				}
+				else
+				{
+					do
+					{
+						this._random___0 = UnityEngine.Random.Range(0, this._this.animations.Length);
+					}
+					while (this._random___0 == this._this.lastIndex);
+				}
 				this._this.lastIndex = this._random___0;
 				this._this.animator.AnimationState.SetAnimation(0, this._this.animations[this._random___0], true);
 				this._current = this._this.waitForSeconds;

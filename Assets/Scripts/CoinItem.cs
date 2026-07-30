@@ -16,6 +16,11 @@ public class CoinItem : MonoBehaviour
 
 	public void Init(Vector3[] path, double cash)
 	{
+		if (path == null || path.Length == 0)
+		{
+			this.movement = false;
+			return;
+		}
 		this.path = path;
 		this.cash = cash;
 		this.movement = true;
@@ -25,6 +30,12 @@ public class CoinItem : MonoBehaviour
 	{
 		if (!this.movement)
 		{
+			return;
+		}
+		// Guard against null or out-of-range path state
+		if (this.path == null || this.nodeIndex >= this.path.Length)
+		{
+			this.movement = false;
 			return;
 		}
 		base.transform.position = Vector3.Slerp(base.transform.position, this.path[this.nodeIndex], Time.deltaTime * this.movementSpeed);

@@ -127,7 +127,10 @@ public class BarrierController : MonoBehaviour
 			case 0u:
 				this._this.processRunning = true;
 				this._kitchenCount___0 = Singleton<GameManager>.Instance.kitchenController.Count;
-				this._totalDuration___0 = this._this.config.barrier[this._kitchenCount___0 / this._this.config.kitchen.barrierStep - 1].unlockDuration;
+				int _barrierIdx___0 = this._this.GetBarrierIndex(this._kitchenCount___0);
+				if (_barrierIdx___0 < 0) { this._this.processRunning = false; this._PC = -1; return false; }
+				this._totalDuration___0 = this._this.config.barrier[_barrierIdx___0].unlockDuration;
+				if (this._totalDuration___0 <= 0) { this._this.ProcessDone(); this._PC = -1; return false; }
 				break;
 			case 1u:
 				break;
@@ -138,7 +141,11 @@ public class BarrierController : MonoBehaviour
 			{
 				this._percent___1 = (float)this._this.barrierData.unlockRemaining / (float)this._totalDuration___0;
 				GameUtilities.String.ToText(this._this.process.remainingText, GameUtilities.DateTime.Convert(this._this.barrierData.unlockRemaining));
-				GameUtilities.String.ToText(this._this.process.diamondText, ((int)Math.Ceiling((double)((float)this._this.config.barrier[this._kitchenCount___0 / this._this.config.kitchen.barrierStep - 1].diamondToUnlock * this._percent___1))).ToString());
+				int _barrierIdx2___0 = this._this.GetBarrierIndex(this._kitchenCount___0);
+				if (_barrierIdx2___0 >= 0)
+				{
+					GameUtilities.String.ToText(this._this.process.diamondText, ((int)Math.Ceiling((double)((float)this._this.config.barrier[_barrierIdx2___0].diamondToUnlock * this._percent___1))).ToString());
+				}
 				this._this.process.processFillBar.fillAmount = this._percent___1;
 				if (this._this.barrierData.unlockRemaining > 0)
 				{
@@ -205,10 +212,11 @@ public class BarrierController : MonoBehaviour
 	public void Initialize()
 	{
 		this.waiting = new WaitForSeconds(1f);
-		GameManager expr_15 = Singleton<GameManager>.Instance;
-		expr_15.onCashChange = (Action<double>)Delegate.Combine(expr_15.onCashChange, new Action<double>(this.OnCashChange));
-		GameManager expr_3B = Singleton<GameManager>.Instance;
-		expr_3B.onIdleCashChange = (Action<double>)Delegate.Combine(expr_3B.onIdleCashChange, new Action<double>(this.OnIdleCashChange));
+		// Unsubscribe first to prevent duplicate callbacks on repeated Initialize calls
+		Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+		Singleton<GameManager>.Instance.onIdleCashChange -= this.OnIdleCashChange;
+		Singleton<GameManager>.Instance.onCashChange += this.OnCashChange;
+		Singleton<GameManager>.Instance.onIdleCashChange += this.OnIdleCashChange;
 		this.targetRestaurant = Singleton<GameManager>.Instance.database.targetRestaurant;
 		this.barrierData = Singleton<GameManager>.Instance.database.restaurant[this.targetRestaurant].barrier;
 		this.OfflineTimeCalculate();
@@ -260,7 +268,9 @@ public class BarrierController : MonoBehaviour
 				{
 					this.locked.lockedContent.SetActive(false);
 					this.process.processContent.SetActive(true);
-					GameUtilities.String.ToText(this.process.reduceTimeText, "-" + GameUtilities.DateTime.Convert(this.config.barrier[count / this.config.kitchen.barrierStep - 1].reduceProcessTime));
+					int reduceIdx = this.GetBarrierIndex(count);
+				if (reduceIdx >= 0)
+					GameUtilities.String.ToText(this.process.reduceTimeText, "-" + GameUtilities.DateTime.Convert(this.config.barrier[reduceIdx].reduceProcessTime));
 					if (!this.processRunning)
 					{
 						this.processing = base.StartCoroutine(this.Processing());
@@ -272,7 +282,9 @@ public class BarrierController : MonoBehaviour
 				this.locked.lockedContent.SetActive(true);
 				double num2 = Singleton<GameProcess>.Instance.GetFloorPrice(count) / (double)this.config.kitchen.unlockBarrierFactor;
 				GameUtilities.String.ToText(this.locked.barrierPriceText, GameUtilities.Currencies.Convert(num2));
-				GameUtilities.String.ToText(this.locked.processTimeText, GameUtilities.DateTime.Convert(this.config.barrier[count / this.config.kitchen.barrierStep - 1].unlockDuration));
+				int lockIdx = this.GetBarrierIndex(count);
+			if (lockIdx >= 0)
+				GameUtilities.String.ToText(this.locked.processTimeText, GameUtilities.DateTime.Convert(this.config.barrier[lockIdx].unlockDuration));
 				this.locked.unlockButtonImage.sprite = ((Singleton<GameManager>.Instance.database.cash >= num2) ? this.general.buttonEnableSprite : this.general.buttonDisableSprite);
 			}
 		}
@@ -323,7 +335,9 @@ public class BarrierController : MonoBehaviour
 			return;
 		}
 		Singleton<GameManager>.Instance.SetCash(-num);
-		this.barrierData.unlockRemaining = this.config.barrier[count / this.config.kitchen.barrierStep - 1].unlockDuration;
+		int startIdx = this.GetBarrierIndex(count);
+		if (startIdx < 0) return;
+		this.barrierData.unlockRemaining = this.config.barrier[startIdx].unlockDuration;
 		this.barrierData.state = BarrierState.Process;
 		this.Refresh();
 	}
@@ -339,7 +353,9 @@ public class BarrierController : MonoBehaviour
 		AdsControl.Instance.PlayDelegateRewardVideo(delegate
 		{
 			int count = Singleton<GameManager>.Instance.kitchenController.Count;
-			this.barrierData.unlockRemaining -= this.config.barrier[count / this.config.kitchen.barrierStep - 1].reduceProcessTime;
+			int reduceProcessIdx = this.GetBarrierIndex(count);
+			if (reduceProcessIdx >= 0)
+				this.barrierData.unlockRemaining -= this.config.barrier[reduceProcessIdx].reduceProcessTime;
 			if (this.barrierData.unlockRemaining < 0)
 			{
 				this.barrierData.unlockRemaining = 0;
@@ -357,8 +373,12 @@ public class BarrierController : MonoBehaviour
 	public void UnlockBarrierWithDiamond()
 	{
 		int count = Singleton<GameManager>.Instance.kitchenController.Count;
-		float num = (float)this.barrierData.unlockRemaining / (float)this.config.barrier[count / this.config.kitchen.barrierStep - 1].unlockDuration;
-		int diamond = (int)Math.Ceiling((double)((float)this.config.barrier[count / this.config.kitchen.barrierStep - 1].diamondToUnlock * num));
+		int unlockIdx = this.GetBarrierIndex(count);
+		if (unlockIdx < 0) return;
+		int unlockDur = this.config.barrier[unlockIdx].unlockDuration;
+		if (unlockDur <= 0) return;
+		float num = (float)this.barrierData.unlockRemaining / (float)unlockDur;
+		int diamond = (int)Math.Ceiling((double)((float)this.config.barrier[unlockIdx].diamondToUnlock * num));
 		if (Singleton<GameManager>.Instance.database.diamond < diamond)
 		{
 			Notification.instance.Warning("Not Enough Diamond");
@@ -454,5 +474,27 @@ public class BarrierController : MonoBehaviour
 		{
 			this.OfflineTimeCalculate();
 		}
+	}
+
+	private void OnDestroy()
+	{
+		if (Singleton<GameManager>.Instance != null)
+		{
+			Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+			Singleton<GameManager>.Instance.onIdleCashChange -= this.OnIdleCashChange;
+		}
+	}
+
+	// Returns a safe barrier config index, or -1 if invalid
+	private int GetBarrierIndex(int count)
+	{
+		if (this.config == null || this.config.barrier == null || this.config.barrier.Length == 0)
+			return -1;
+		int step = this.config.kitchen.barrierStep;
+		if (step <= 0) return -1;
+		int idx = count / step - 1;
+		if (idx < 0 || idx >= this.config.barrier.Length)
+			return -1;
+		return idx;
 	}
 }

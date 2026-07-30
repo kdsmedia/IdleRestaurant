@@ -88,19 +88,28 @@ public class InAppPurchase : MonoBehaviour, IStoreListener
 
 	public string GetLocalizePrice(int index)
 	{
-		return (!this.IsInitialized()) ? this.products[index].price : InAppPurchase.storeController.products.WithID(this.products[index].googlePlayID).metadata.localizedPriceString;
+		if (index < 0 || index >= this.products.Count)
+			return "";
+		if (!this.IsInitialized())
+			return this.products[index].price;
+		// Use platform-appropriate store ID
+		bool isApple = Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.OSXPlayer;
+		string storeId = isApple ? this.products[index].appStoreID : this.products[index].googlePlayID;
+		Product prod = InAppPurchase.storeController.products.WithID(storeId);
+		return (prod != null && prod.metadata != null) ? prod.metadata.localizedPriceString : this.products[index].price;
 	}
 
 	private void LoadLocalizePrice()
 	{
-		Product[] all = InAppPurchase.storeController.products.all;
-		if (all.Length == 0)
-		{
-			return;
-		}
+		if (!this.IsInitialized()) return;
+		// Match by product ID instead of array order (order is not guaranteed)
 		for (int i = 0; i < this.products.Count; i++)
 		{
-			this.products[i].price = all[i].metadata.localizedPriceString;
+			Product prod = InAppPurchase.storeController.products.WithID(this.products[i].name);
+			if (prod != null && prod.metadata != null)
+			{
+				this.products[i].price = prod.metadata.localizedPriceString;
+			}
 		}
 	}
 

@@ -87,6 +87,14 @@ public class RestaurantPopup : MonoBehaviour
 		expr_05.onCashChange = (Action<double>)Delegate.Combine(expr_05.onCashChange, new Action<double>(this.OnCashChange));
 	}
 
+	private void OnDestroy()
+	{
+		if (Singleton<GameManager>.Instance != null)
+		{
+			Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+		}
+	}
+
 	public void SelectUpgradeStep(int value)
 	{
 		int num = 0;
@@ -132,7 +140,10 @@ public class RestaurantPopup : MonoBehaviour
 		int nextBonusAtLevel = Singleton<GameProcess>.Instance.GetNextBonusAtLevel(this.restaurantController.restaurantData.level, Location.Restaurant);
 		GameUtilities.String.ToText(this.currentLevel, "Level " + this.restaurantController.restaurantData.level.ToString());
 		GameUtilities.String.ToText(this.nextLevel, (nextBonusAtLevel != 2147483647) ? ("Next boost at level " + nextBonusAtLevel.ToString()) : "Boost maximum.");
-		this.currentLevelFill.fillAmount = ((nextBonusAtLevel != 2147483647) ? ((float)(this.restaurantController.restaurantData.level - lastBonusAtLevel) / (float)(nextBonusAtLevel - lastBonusAtLevel)) : 1f);
+		{
+			int fillDenom = nextBonusAtLevel - lastBonusAtLevel;
+			this.currentLevelFill.fillAmount = (nextBonusAtLevel != 2147483647 && fillDenom > 0) ? Mathf.Clamp01((float)(this.restaurantController.restaurantData.level - lastBonusAtLevel) / (float)fillDenom) : 1f;
+		}
 		RestaurantProperties restaurantProperties = this.restaurantController.restaurantProperties;
 		GameUtilities.String.ToText(this.currentWaiter, restaurantProperties.waiter.ToString());
 		GameUtilities.String.ToText(this.currentSpeed, Math.Round((double)restaurantProperties.walkingSpeed, 2).ToString());
@@ -173,8 +184,11 @@ public class RestaurantPopup : MonoBehaviour
 			GameUtilities.String.ToText(this.levelNumber, "Level Up x" + num.ToString());
 			GameUtilities.String.ToText(this.upgradePrice, GameUtilities.Currencies.Convert(num2));
 			this.upgradeButton.sprite = ((Singleton<GameManager>.Instance.database.cash < num2 || this.restaurantController.restaurantData.level + num > Singleton<GameProcess>.Instance.GetMaxLevel(Location.Restaurant)) ? this.disableSprite : this.enableSprite);
-			this.nextLevelFill.fillAmount = ((nextBonusAtLevel != 2147483647) ? ((float)(this.restaurantController.restaurantData.level + num - lastBonusAtLevel) / (float)(nextBonusAtLevel - lastBonusAtLevel)) : 1f);
-			int diamondBonus = Singleton<GameProcess>.Instance.GetDiamondBonus(this.restaurantController.restaurantData.level + num, this.restaurantController.restaurantData.level, Location.Elevator);
+			{
+				int nextFillDenom = nextBonusAtLevel - lastBonusAtLevel;
+				this.nextLevelFill.fillAmount = (nextBonusAtLevel != 2147483647 && nextFillDenom > 0) ? Mathf.Clamp01((float)(this.restaurantController.restaurantData.level + num - lastBonusAtLevel) / (float)nextFillDenom) : 1f;
+			}
+			int diamondBonus = Singleton<GameProcess>.Instance.GetDiamondBonus(this.restaurantController.restaurantData.level + num, this.restaurantController.restaurantData.level, Location.Restaurant);
 			GameUtilities.String.ToText(this.bonusDiamond, "+" + diamondBonus.ToString());
 			this.bonusDiamond.gameObject.SetActive(diamondBonus > 0);
 		}
@@ -206,7 +220,7 @@ public class RestaurantPopup : MonoBehaviour
 		{
 			num = Singleton<GameProcess>.Instance.GetMaxUpgradeLevel(Singleton<GameManager>.Instance.database.cash, this.restaurantController.boostController.upgradeCostReduced, this.restaurantController.restaurantData.level, Location.Restaurant, 0);
 		}
-		num = Mathf.Clamp(num, 1, Singleton<GameProcess>.Instance.GetMaxLevel(Location.Elevator) - 1);
+		num = Mathf.Clamp(num, 1, Singleton<GameProcess>.Instance.GetMaxLevel(Location.Restaurant) - 1);
 		double num2 = Singleton<GameProcess>.Instance.GetUpgradePrice(this.restaurantController.restaurantData.level, num, this.restaurantController.boostController.upgradeCostReduced, Location.Restaurant, 0);
 		if (Singleton<GameManager>.Instance.database.cash < num2)
 		{

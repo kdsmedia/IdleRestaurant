@@ -135,4 +135,12 @@ public class RestaurantController : MonoBehaviour
 		this.levelUp[1].SetActive(maxUpgradeLevel > 9);
 		this.levelUp[2].SetActive(maxUpgradeLevel >= 50);
 	}
+
+	private void OnDestroy()
+	{
+		if (Singleton<GameManager>.Instance != null)
+		{
+			Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+		}
+	}
 }

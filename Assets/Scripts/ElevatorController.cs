@@ -295,8 +295,9 @@ public class ElevatorController : MonoBehaviour
 	public void Initialize()
 	{
 		this.managerController.managerAssign = new Action(this.StartTransport);
-		GameManager expr_1C = Singleton<GameManager>.Instance;
-		expr_1C.onCashChange = (Action<double>)Delegate.Combine(expr_1C.onCashChange, new Action<double>(this.OnCashChange));
+		// Unsubscribe first to prevent duplicates on re-initialization
+		Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+		Singleton<GameManager>.Instance.onCashChange += this.OnCashChange;
 		float distance = 2f * (float)((this.kitchenController.Count <= 0) ? 1 : this.kitchenController.Count);
 		this.elevatorProperties = Singleton<GameProcess>.Instance.GetElevatorProperties(distance, this.elevatorData.level);
 		GameUtilities.String.ToText(this.cashText, GameUtilities.Currencies.Convert(this.elevatorData.cash));
@@ -406,5 +407,13 @@ public class ElevatorController : MonoBehaviour
 			num = Mathf.Clamp(num, 30f, 116f);
 		}
 		this.productFill.sizeDelta = new Vector2(this.productFill.sizeDelta.x, num);
+	}
+
+	private void OnDestroy()
+	{
+		if (Singleton<GameManager>.Instance != null)
+		{
+			Singleton<GameManager>.Instance.onCashChange -= this.OnCashChange;
+		}
 	}
 }
