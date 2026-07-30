@@ -69983,11 +69983,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   packProduct:
   - id: offlinepack
-    price: 3.99
+    adsRequired: 10
     priceLabel: {fileID: 1789880861211680557}
     target: {fileID: 1789880861211678066}
   - id: onlinepack
-    price: 7.99
+    adsRequired: 20
     priceLabel: {fileID: 1789880861211680826}
     target: {fileID: 1789880861211678539}
   coinProduct:
@@ -70032,28 +70032,23 @@ MonoBehaviour:
     valueLabel: {fileID: 1789880861211680949}
   diamondProduct:
   - id: diamondpack1
-    value: 250
-    price: 0.99
+    value: 1
     valueLabel: {fileID: 1789880861211680691}
     priceLabel: {fileID: 1789880861211680505}
   - id: diamondpack2
-    value: 1500
-    price: 4.99
+    value: 1
     valueLabel: {fileID: 1789880861211680159}
     priceLabel: {fileID: 1789880861211680908}
   - id: diamondpack3
-    value: 3500
-    price: 9.99
+    value: 1
     valueLabel: {fileID: 1789880861211680935}
     priceLabel: {fileID: 1789880861211680461}
   - id: diamondpack4
-    value: 10000
-    price: 24.99
+    value: 1
     valueLabel: {fileID: 1789880861211680097}
     priceLabel: {fileID: 1789880861211680142}
   - id: diamondpack5
-    value: 22000
-    price: 49.99
+    value: 1
     valueLabel: {fileID: 1789880861211680513}
     priceLabel: {fileID: 1789880861211681004}
   shopRectransform: {fileID: 1789880861211679633}
