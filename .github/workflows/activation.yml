@@ -25,7 +25,7 @@ jobs:
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/output" \
-            unityci/editor:ubuntu-2021.3.45f1-android-3.2.2 \
+            unityci/editor:ubuntu-2021.3.56f2-android-3 \
             bash -c "
               echo '=== Activating Unity Personal License ===' && \
               unity-editor \
