@@ -19,15 +19,15 @@ public class AdsControl : MonoBehaviour
 
     // ── Inspector fields ─────────────────────────────────────────────────────
     [Header("Interstitial Ad Unit IDs")]
-    public string AdmobID_Android;
+    public string AdmobID_Android = "ca-app-pub-6881903056221433/3931475874";
     public string AdmobID_IOS;
 
     [Header("Banner Ad Unit IDs")]
-    public string BannerID_Android;
+    public string BannerID_Android = "ca-app-pub-6881903056221433/9606474387";
     public string BannerID_IOS;
 
     [Header("Rewarded Video Ad Unit IDs")]
-    public string RewardVideoID_Android;
+    public string RewardVideoID_Android = "ca-app-pub-6881903056221433/9123258658";
     public string RewardVideoID_IOS;
 
     // ── Private state ─────────────────────────────────────────────────────────
