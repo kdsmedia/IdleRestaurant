@@ -48,7 +48,7 @@ public class AdsControl : MonoBehaviour
         }
         _instance = this;
 
-        MobileAds.Initialize(initStatus => { });   // Initialize AdMob SDK
+        MobileAds.Initialize("ca-app-pub-6881903056221433~9832217974");   // Initialize AdMob SDK
 
         MakeNewInterstitial();
         RequestBanner();
@@ -139,8 +139,7 @@ public class AdsControl : MonoBehaviour
 #else
         string adUnitId = "unused";
 #endif
-        if (rewardedAd != null)
-            rewardedAd.Destroy();
+        rewardedAd = null;
 
         rewardedAd = new RewardedAd(adUnitId);
 
