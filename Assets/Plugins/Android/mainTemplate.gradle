@@ -37,7 +37,7 @@ maven {
     }
 }
 // Android Resolver Repos End
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 
 dependencies {
@@ -65,7 +65,6 @@ android {
     defaultConfig {
         minSdkVersion **MINSDKVERSION**
         targetSdkVersion **TARGETSDKVERSION**
-        applicationId '**APPLICATIONID**'
         ndk {
             abiFilters **ABIFILTERS**
         }
