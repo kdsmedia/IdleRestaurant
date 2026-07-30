@@ -1,292 +1,183 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class GetFreeCoin : MonoBehaviour
 {
-	private sealed class _Initialize_c__Iterator0 : IEnumerator, IDisposable, IEnumerator<object>
-	{
-		internal WWW _www___0;
+    // Server time URL — replace with your own time API endpoint.
+    // The endpoint must return a plain Unix timestamp (seconds since 1970-01-01 UTC).
+    // If the server is unreachable the script falls back to device local time.
+    private const string TIME_SERVER_URL = "https://worldtimeapi.org/api/timezone/Etc/UTC";
 
-		internal GetFreeCoin _this;
+    private bool cooldown;
+    private Coroutine cooldowing;
+    private DateTime currentTime;
+    private FreeCoinData freeCoinData;
+    private WaitForSeconds waitForSeconds;
 
-		internal object _current;
+    [SerializeField] private Configuration config;
+    [SerializeField] private Text watchAdsRemaining;
+    [SerializeField] private GameObject watchAdsLabel;
+    [SerializeField] private GameObject freeCashButton;
+    [SerializeField] private GameObject watchAdsButton;
+    [SerializeField] private GameObject[] notification;
 
-		internal bool _disposing;
+    private void Start()
+    {
+        waitForSeconds = new WaitForSeconds(1f);
+        freeCoinData = Singleton<DataManager>.Instance.database.freeCashData;
+        StartCoroutine(Initialize());
+    }
 
-		internal int _PC;
+    private IEnumerator Initialize()
+    {
+        currentTime = DateTime.Now; // default fallback
 
-		object IEnumerator<object>.Current
-		{
-			get
-			{
-				return this._current;
-			}
-		}
+        using (UnityWebRequest request = UnityWebRequest.Get(TIME_SERVER_URL))
+        {
+            request.timeout = 5; // seconds
+            yield return request.SendWebRequest();
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				return this._current;
-			}
-		}
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                // worldtimeapi.org returns JSON; parse the "unixtime" field.
+                string json = request.downloadHandler.text;
+                string unixtimeKey = "\"unixtime\":";
+                int idx = json.IndexOf(unixtimeKey);
+                if (idx >= 0)
+                {
+                    int start = idx + unixtimeKey.Length;
+                    int end = json.IndexOfAny(new char[] { ',', '}' }, start);
+                    string unixStr = json.Substring(start, end - start).Trim();
+                    double unixSeconds;
+                    if (double.TryParse(unixStr, out unixSeconds))
+                    {
+                        currentTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                            .AddSeconds(unixSeconds)
+                            .ToLocalTime();
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[GetFreeCoin] Could not reach time server (" + request.error + "). Using device time as fallback.");
+                currentTime = DateTime.Now;
+            }
+        }
 
-		public _Initialize_c__Iterator0()
-		{
-		}
+        // Check if a new day has passed since last free claim
+        DateTime lastGetFree = Convert.ToDateTime(freeCoinData.lastTimeGetFree);
+        bool newDay = (lastGetFree.Day != currentTime.Day || lastGetFree.Month != currentTime.Month);
+        if (newDay && !Singleton<DataManager>.Instance.database.freeCashData.free)
+        {
+            Singleton<DataManager>.Instance.database.freeCashData.free = true;
+        }
 
-		public bool MoveNext()
-		{
-			uint num = (uint)this._PC;
-			this._PC = -1;
-			switch (num)
-			{
-			case 0u:
-				this._www___0 = new WWW("http://mega.ikame.vn/index.php?index=get_time");
-				this._current = this._www___0;
-				if (!this._disposing)
-				{
-					this._PC = 1;
-				}
-				return true;
-			case 1u:
-				if (this._www___0.error == null)
-				{
-					this._this.currentTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-					this._this.currentTime = this._this.currentTime.AddSeconds(Convert.ToDouble(this._www___0.text)).ToLocalTime();
-					DateTime dateTime = Convert.ToDateTime(this._this.freeCoinData.lastTimeGetFree);
-					if ((dateTime.Day != this._this.currentTime.Day || dateTime.Month != this._this.currentTime.Month) && !Singleton<DataManager>.Instance.database.freeCashData.free)
-					{
-						Singleton<DataManager>.Instance.database.freeCashData.free = true;
-					}
-					if (this._this.freeCoinData.watchAds == this._this.config.freeCash.watchAdLimited)
-					{
-						int num2 = (int)this._this.currentTime.Subtract(Convert.ToDateTime(this._this.freeCoinData.lastTimeWatchAd)).TotalSeconds;
-						if (num2 >= this._this.config.freeCash.cooldownPerAds)
-						{
-							this._this.freeCoinData.watchAds = 0;
-						}
-					}
-				}
-				this._this.FreeCashValidate();
-				this._PC = -1;
-				break;
-			}
-			return false;
-		}
+        // Reset watch-ad counter if cooldown has expired
+        if (freeCoinData.watchAds == config.freeCash.watchAdLimited)
+        {
+            int elapsed = (int)currentTime.Subtract(Convert.ToDateTime(freeCoinData.lastTimeWatchAd)).TotalSeconds;
+            if (elapsed >= config.freeCash.cooldownPerAds)
+            {
+                freeCoinData.watchAds = 0;
+            }
+        }
 
-		public void Dispose()
-		{
-			this._disposing = true;
-			this._PC = -1;
-		}
+        FreeCashValidate();
+    }
 
-		public void Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
+    private void FreeCashValidate()
+    {
+        freeCashButton.SetActive(freeCoinData.free);
+        watchAdsButton.SetActive(!freeCoinData.free);
 
-	private sealed class _Cooldown_c__Iterator1 : IEnumerator, IDisposable, IEnumerator<object>
-	{
-		internal int _duration___0;
+        for (int i = 0; i < notification.Length; i++)
+        {
+            notification[i].SetActive(freeCoinData.free);
+        }
 
-		internal GetFreeCoin _this;
+        bool limitReached = (freeCoinData.watchAds == config.freeCash.watchAdLimited);
+        watchAdsLabel.SetActive(!limitReached);
+        watchAdsRemaining.gameObject.SetActive(limitReached);
 
-		internal object _current;
+        if (limitReached && !cooldown)
+        {
+            cooldowing = StartCoroutine(Cooldown());
+        }
+    }
 
-		internal bool _disposing;
+    public void GetFreeCash()
+    {
+        freeCoinData.free = false;
+        freeCoinData.lastTimeGetFree = DateTime.Now.ToString();
+        Singleton<GameManager>.Instance.SetDiamond(config.freeCash.diamondBonus);
+        Notification.instance.Warning("Received <color=#00FFDFFF>" + config.freeCash.diamondBonus.ToString() + "</color> diamond");
+        Singleton<SoundManager>.Instance.Play("Rewarded");
+        FreeCashValidate();
+    }
 
-		internal int _PC;
+    public void WatchAdsFreeCash()
+    {
+        if (!AdsControl.Instance.GetRewardAvailable())
+        {
+            Notification.instance.Warning("No available video at the moment.");
+            Singleton<SoundManager>.Instance.Play("Notification");
+            return;
+        }
 
-		object IEnumerator<object>.Current
-		{
-			get
-			{
-				return this._current;
-			}
-		}
-
-		object IEnumerator.Current
-		{
-			get
-			{
-				return this._current;
-			}
-		}
-
-		public _Cooldown_c__Iterator1()
-		{
-		}
-
-		public bool MoveNext()
-		{
-			uint num = (uint)this._PC;
-			this._PC = -1;
-			switch (num)
-			{
-			case 0u:
-				this._this.cooldown = true;
-				this._duration___0 = (int)DateTime.Now.Subtract(Convert.ToDateTime(this._this.freeCoinData.lastTimeWatchAd)).TotalSeconds;
-				this._duration___0 = Mathf.Clamp(this._this.config.freeCash.cooldownPerAds - this._duration___0, 0, this._this.config.freeCash.cooldownPerAds);
-				break;
-			case 1u:
-				this._duration___0--;
-				break;
-			default:
-				return false;
-			}
-			if (this._duration___0 > 0)
-			{
-				GameUtilities.String.ToText(this._this.watchAdsRemaining, GameUtilities.DateTime.Convert(this._duration___0));
-				this._current = this._this.waitForSeconds;
-				if (!this._disposing)
-				{
-					this._PC = 1;
-				}
-				return true;
-			}
-			this._this.cooldown = false;
-			this._this.watchAdsLabel.SetActive(true);
-			this._this.watchAdsRemaining.gameObject.SetActive(false);
-			this._this.freeCoinData.watchAds = 0;
-			this._PC = -1;
-			return false;
-		}
-
-		public void Dispose()
-		{
-			this._disposing = true;
-			this._PC = -1;
-		}
-
-		public void Reset()
-		{
-			throw new NotSupportedException();
-		}
-	}
-
-	private bool cooldown;
-
-	private Coroutine cooldowing;
-
-	private DateTime currentTime;
-
-	private FreeCoinData freeCoinData;
-
-	private WaitForSeconds waitForSeconds;
-
-	[SerializeField]
-	private Configuration config;
-
-	[SerializeField]
-	private Text watchAdsRemaining;
-
-	[SerializeField]
-	private GameObject watchAdsLabel;
-
-	[SerializeField]
-	private GameObject freeCashButton;
-
-	[SerializeField]
-	private GameObject watchAdsButton;
-
-	[SerializeField]
-	private GameObject[] notification;
-
-	private void Start()
-	{
-		this.waitForSeconds = new WaitForSeconds(1f);
-		this.freeCoinData = Singleton<DataManager>.Instance.database.freeCashData;
-		base.StartCoroutine(this.Initialize());
-	}
-
-	private IEnumerator Initialize()
-	{
-		GetFreeCoin._Initialize_c__Iterator0 _Initialize_c__Iterator = new GetFreeCoin._Initialize_c__Iterator0();
-		_Initialize_c__Iterator._this = this;
-		return _Initialize_c__Iterator;
-	}
-
-	private void FreeCashValidate()
-	{
-		this.freeCashButton.SetActive(this.freeCoinData.free);
-		this.watchAdsButton.SetActive(!this.freeCoinData.free);
-		for (int i = 0; i < this.notification.Length; i++)
-		{
-			this.notification[i].SetActive(this.freeCoinData.free);
-		}
-		bool flag = this.freeCoinData.watchAds == this.config.freeCash.watchAdLimited;
-		this.watchAdsLabel.SetActive(!flag);
-		this.watchAdsRemaining.gameObject.SetActive(flag);
-		if (flag && !this.cooldown)
-		{
-			this.cooldowing = base.StartCoroutine(this.Cooldown());
-		}
-	}
-
-	public void GetFreeCash()
-	{
-		this.freeCoinData.free = false;
-		this.freeCoinData.lastTimeGetFree = DateTime.Now.ToString();
-		Singleton<GameManager>.Instance.SetDiamond(this.config.freeCash.diamondBonus);
-		Notification.instance.Warning("Received <color=#00FFDFFF>" + this.config.freeCash.diamondBonus.ToString() + "</color> diamond");
-		Singleton<SoundManager>.Instance.Play("Rewarded");
-		this.FreeCashValidate();
-	}
-
-	public void WatchAdsFreeCash()
-	{
-		if (!AdsControl.Instance.GetRewardAvailable())
-		{
-			Notification.instance.Warning("No available video at the moment.");
-			Singleton<SoundManager>.Instance.Play("Notification");
-			return;
-		}
         AdsControl.Instance.PlayDelegateRewardVideo(delegate
-		{
-			if (this.freeCoinData.watchAds == this.config.freeCash.watchAdLimited)
-			{
-				return;
-			}
-			this.freeCoinData.watchAds++;
-			if (this.freeCoinData.watchAds == this.config.freeCash.watchAdLimited)
-			{
-				this.freeCoinData.lastTimeWatchAd = DateTime.Now.ToString();
-			}
-			Singleton<GameManager>.Instance.SetDiamond(this.config.freeCash.diamondBonus);
-			Notification.instance.Warning("Received <color=#00FFDFFF>" + this.config.freeCash.diamondBonus.ToString() + "</color> diamond");
-			Singleton<SoundManager>.Instance.Play("Rewarded");
-			this.FreeCashValidate();
-			Tracking.instance.Ads_Impress("reward", "GetFreeDiamond");
-		});
-	}
+        {
+            if (freeCoinData.watchAds == config.freeCash.watchAdLimited)
+                return;
 
-	private IEnumerator Cooldown()
-	{
-		GetFreeCoin._Cooldown_c__Iterator1 _Cooldown_c__Iterator = new GetFreeCoin._Cooldown_c__Iterator1();
-		_Cooldown_c__Iterator._this = this;
-		return _Cooldown_c__Iterator;
-	}
+            freeCoinData.watchAds++;
+            if (freeCoinData.watchAds == config.freeCash.watchAdLimited)
+            {
+                freeCoinData.lastTimeWatchAd = DateTime.Now.ToString();
+            }
 
-	private void OnApplicationPause(bool paused)
-	{
-		if (paused)
-		{
-			if (this.cooldown)
-			{
-				this.cooldown = false;
-				base.StopCoroutine(this.cooldowing);
-			}
-		}
-		else
-		{
-			base.StartCoroutine(this.Initialize());
-		}
-	}
+            Singleton<GameManager>.Instance.SetDiamond(config.freeCash.diamondBonus);
+            Notification.instance.Warning("Received <color=#00FFDFFF>" + config.freeCash.diamondBonus.ToString() + "</color> diamond");
+            Singleton<SoundManager>.Instance.Play("Rewarded");
+            FreeCashValidate();
+            Tracking.instance.Ads_Impress("reward", "GetFreeDiamond");
+        });
+    }
+
+    private IEnumerator Cooldown()
+    {
+        cooldown = true;
+        int elapsed = (int)DateTime.Now.Subtract(Convert.ToDateTime(freeCoinData.lastTimeWatchAd)).TotalSeconds;
+        int duration = Mathf.Clamp(config.freeCash.cooldownPerAds - elapsed, 0, config.freeCash.cooldownPerAds);
+
+        while (duration > 0)
+        {
+            GameUtilities.String.ToText(watchAdsRemaining, GameUtilities.DateTime.Convert(duration));
+            yield return waitForSeconds;
+            duration--;
+        }
+
+        cooldown = false;
+        watchAdsLabel.SetActive(true);
+        watchAdsRemaining.gameObject.SetActive(false);
+        freeCoinData.watchAds = 0;
+    }
+
+    private void OnApplicationPause(bool paused)
+    {
+        if (paused)
+        {
+            if (cooldown)
+            {
+                cooldown = false;
+                StopCoroutine(cooldowing);
+            }
+        }
+        else
+        {
+            StartCoroutine(Initialize());
+        }
+    }
 }
