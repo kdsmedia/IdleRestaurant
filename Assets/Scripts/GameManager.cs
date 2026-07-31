@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
 		this.InitManager();
 		this.barrier.Initialize();
 		this.boostManager.Initialize();
-		this.onCashChange(this.database.cash);
+		if (this.onCashChange != null) this.onCashChange(this.database.cash);
         //Singleton<GameManager>.Instance.SetDiamond(10000000);
     }
 
@@ -160,7 +160,7 @@ public class GameManager : Singleton<GameManager>
 		{
 			this.database.restaurant[this.database.targetRestaurant].idleCash = 0.0;
 		}
-		this.onIdleCashChange(this.database.restaurant[this.database.targetRestaurant].idleCash);
+		if (this.onIdleCashChange != null) this.onIdleCashChange(this.database.restaurant[this.database.targetRestaurant].idleCash);
 		GameUtilities.String.ToText(this.idleCashText, GameUtilities.Currencies.Convert(this.database.restaurant[this.database.targetRestaurant].idleCash) + "/s");
 	}
 
@@ -188,7 +188,7 @@ public class GameManager : Singleton<GameManager>
 		this.database.cash += cash;
 		GameUtilities.String.ToText(this.mainScreenCash, GameUtilities.Currencies.Convert(this.database.cash));
 		GameUtilities.String.ToText(this.shopScreenCash, GameUtilities.Currencies.Convert(this.database.cash));
-		this.onCashChange(this.database.cash);
+		if (this.onCashChange != null) this.onCashChange(this.database.cash);
 	}
 
 	public void SetDiamond(int diamond)
