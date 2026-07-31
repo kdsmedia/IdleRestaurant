@@ -37,6 +37,19 @@ maven {
     }
 }
 // Android Resolver Repos End
+
+// Force consistent play-services-measurement versions to prevent duplicate class errors
+// between firebase-analytics and play-services-ads transitive dependencies
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.android.gms:play-services-measurement:18.0.3'
+        force 'com.google.android.gms:play-services-measurement-sdk-api:18.0.3'
+        force 'com.google.android.gms:play-services-measurement-base:18.0.3'
+        force 'com.google.android.gms:play-services-measurement-impl:18.0.3'
+        force 'com.google.android.gms:play-services-measurement-api:18.0.3'
+    }
+}
+
 apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 
@@ -45,9 +58,9 @@ dependencies {
 // Android Resolver Dependencies Start
     implementation 'com.google.android.gms:play-services-ads:20.6.0' // Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml:7
     implementation 'com.google.auto.value:auto-value-annotations:1.6.3' // Assets/Firebase/Editor/AppDependencies.xml:22
-    implementation 'com.google.firebase:firebase-analytics:16.5.0' // Assets/Firebase/Editor/AppDependencies.xml:15
-    implementation 'com.google.firebase:firebase-common:17.0.0' // Assets/Firebase/Editor/AppDependencies.xml:13
-    implementation 'com.google.firebase:firebase-iid:[18.0.0]' // Assets/Firebase/Editor/AnalyticsDependencies.xml:15
+    implementation 'com.google.firebase:firebase-analytics:17.6.0' // Assets/Firebase/Editor/AppDependencies.xml:15 (upgraded from 16.5.0 to fix measurement class conflict)
+    implementation 'com.google.firebase:firebase-common:19.6.0' // Assets/Firebase/Editor/AppDependencies.xml:13 (upgraded from 17.0.0)
+    implementation 'com.google.firebase:firebase-iid:21.1.0' // Assets/Firebase/Editor/AnalyticsDependencies.xml:15 (pinned to avoid range conflict)
 // Android Resolver Dependencies End
 **DEPS**}
 
